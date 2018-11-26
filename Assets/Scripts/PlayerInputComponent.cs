@@ -6,10 +6,15 @@ using UnityEngine;
 public class PlayerInputComponent : MonoBehaviour {
     // Update is called once per frame
 	void Update() {
-        Player s = this.GetComponent<Player>();
+        Player p = this.GetComponent<Player>();
 
-        float speed = s.ShipStats.movespeed * Time.deltaTime;
-        Vector2 newPos = s.ShipStats.position;
+        if (p.ShipStats.lives == 0)
+        {
+            return;
+        }
+
+        float speed = p.ShipStats.movespeed * Time.deltaTime;
+        Vector2 newPos = p.ShipStats.position;
 
         // Get ships new position
         if (Input.GetKey("w"))
@@ -32,7 +37,7 @@ public class PlayerInputComponent : MonoBehaviour {
         newPos.x = Mathf.Clamp(newPos.x, -5f, 5f);
         newPos.y = Mathf.Clamp(newPos.y, -9.5f, 9.5f);
 
-        s.ShipStats.position = newPos;
+        p.ShipStats.position = newPos;
         transform.position = newPos;
     }
 }

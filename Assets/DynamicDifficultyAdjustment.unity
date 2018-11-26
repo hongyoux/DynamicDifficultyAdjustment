@@ -198,6 +198,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &574638971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1964102092428444, guid: 7d18a72e23961434888798fd72ded9c8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1522240877}
+--- !u!114 &574638978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 574638971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 401c029ece508f642ac00c65b7ec3b3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1522240877
 Prefab:
   m_ObjectHideFlags: 0
@@ -235,6 +251,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4128370472873030, guid: 7d18a72e23961434888798fd72ded9c8, type: 2}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246079263200538, guid: 7d18a72e23961434888798fd72ded9c8,
+        type: 2}
+      propertyPath: ShipStats.health
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114246079263200538, guid: 7d18a72e23961434888798fd72ded9c8,
+        type: 2}
+      propertyPath: ShipStats.powerLevel
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
