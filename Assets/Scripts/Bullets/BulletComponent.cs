@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponInterface : MonoBehaviour {
+public class BulletComponent : MonoBehaviour {
+    public BulletStats stats;
 
 	// Use this for initialization
 	void Start () {

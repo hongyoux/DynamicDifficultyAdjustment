@@ -2,23 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Bullet))]
+[RequireComponent(typeof(BulletComponent))]
 public class BulletMovement : MonoBehaviour {
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
 	// Update is called once per frame
 	void Update () {
-        Bullet b = GetComponent<Bullet>();
+        BulletComponent b = GetComponent<BulletComponent>();
 
         Vector2 newPos = b.stats.position;
-
         Vector2 change = b.stats.direction * (b.stats.velocity * Time.deltaTime);
 
         newPos += change;
-
         b.stats.position = newPos;
         transform.position = newPos;
 

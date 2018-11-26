@@ -8,28 +8,28 @@ public class PlayerInputComponent : MonoBehaviour {
 	void Update() {
         Player p = this.GetComponent<Player>();
 
-        if (p.ShipStats.lives == 0)
+        if (p.shipStats.lives == 0)
         {
             return;
         }
 
-        float speed = p.ShipStats.movespeed * Time.deltaTime;
-        Vector2 newPos = p.ShipStats.position;
+        float speed = p.shipStats.movespeed * Time.deltaTime;
+        Vector2 newPos = p.shipStats.position;
 
         // Get ships new position
-        if (Input.GetKey("w"))
+        if (Input.GetKey("w") || Input.GetKey("up"))
         {
             newPos.y += speed;
         }
-        if (Input.GetKey("a"))
+        if (Input.GetKey("a") || Input.GetKey("left"))
         {
             newPos.x -= speed;
         }
-        if (Input.GetKey("s"))
+        if (Input.GetKey("s") || Input.GetKey("down"))
         {
             newPos.y -= speed;
         }
-        if (Input.GetKey("d"))
+        if (Input.GetKey("d") || Input.GetKey("right"))
         {
             newPos.x += speed;
         }
@@ -37,7 +37,7 @@ public class PlayerInputComponent : MonoBehaviour {
         newPos.x = Mathf.Clamp(newPos.x, -5f, 5f);
         newPos.y = Mathf.Clamp(newPos.y, -9.5f, 9.5f);
 
-        p.ShipStats.position = newPos;
+        p.shipStats.position = newPos;
         transform.position = newPos;
     }
 }
