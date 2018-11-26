@@ -4,8 +4,15 @@ using UnityEngine;
 
 [RequireComponent(typeof(Player))]
 public class AttackComponent : MonoBehaviour {
-	// Update is called once per frame
-	void Update () {
+    float cooldown;
+
+    void Start()
+    {
+        cooldown = 0f;
+    }
+
+    // Update is called once per frame
+    void Update () {
         Player p = GetComponent<Player>();
 
         if (p.ShipStats.lives == 0)
@@ -13,12 +20,14 @@ public class AttackComponent : MonoBehaviour {
             return;
         }
 
-        if (Input.GetKey("space")) {
-            p.ShipStats.score += 10;
+        if (Input.GetKey("space") && cooldown == 0) {
+            GameObject newBullet = Instantiate(p.tempBullet, p.spawnPoint);
+            Bullet b = newBullet.GetComponent<Bullet>();
+            b.stats.position = p.spawnPoint.position;
 
-            p.ShipStats.lives -= 1;
+            cooldown = .2f;
+        }
 
-            Debug.Log("Attack Clicked!");
-        }		
+        cooldown = Mathf.Clamp(cooldown - Time.deltaTime, 0f, float.MaxValue);
 	}
 }

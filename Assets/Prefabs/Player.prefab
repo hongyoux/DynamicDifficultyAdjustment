@@ -11,6 +11,21 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1964102092428444}
   m_IsPrefabAsset: 1
+--- !u!1 &1032895234272114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4086855289357870}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1964102092428444
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,6 +39,7 @@ GameObject:
   - component: {fileID: 23845557359005458}
   - component: {fileID: 114246079263200538}
   - component: {fileID: 114937368782307276}
+  - component: {fileID: 114481208295962718}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -31,6 +47,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4086855289357870
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1032895234272114}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.55, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4128370472873030}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4128370472873030
 Transform:
   m_ObjectHideFlags: 1
@@ -40,7 +69,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4086855289357870}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -110,11 +140,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShipStats:
-    health: 100
+    health: 1000
+    lives: 5
     position: {x: 0, y: 0}
     movespeed: 10
     score: 0
     sprite: {fileID: 0}
+    powerLevel: 1
+  spawnPoint: {fileID: 4086855289357870}
+  tempBullet: {fileID: 1548051356718886, guid: 066a3d1da3c05f1409c5be89be403293, type: 2}
+--- !u!114 &114481208295962718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1964102092428444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 401c029ece508f642ac00c65b7ec3b3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114937368782307276
 MonoBehaviour:
   m_ObjectHideFlags: 1
