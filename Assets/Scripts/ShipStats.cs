@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class ShipStats {
-    public int health { get; set; }
-    public Vector2 position { get; set; }
-    public float movespeed { get; set; }
-    public int score { get; set; }
-    public Sprite sprite { get; set; }
+    public int health;
+    public Vector2 position;
+    public float movespeed;
+    public int score;
+    public Sprite sprite;
 }
