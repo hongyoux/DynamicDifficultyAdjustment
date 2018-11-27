@@ -139,8 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b51fdfef2dce004791ffd860329266d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipStats:
-    health: 1000
+  stats:
+    health: 100
     lives: 3
     position: {x: 0, y: 0}
     movespeed: 10
@@ -148,7 +148,7 @@ MonoBehaviour:
     sprite: {fileID: 0}
     powerLevel: 1
   spawnPoint: {fileID: 4086855289357870}
-  tempWeapon: {fileID: 1354308263494022, guid: 63e9fcc8f1e62314fa09f79d5649bd4d, type: 2}
+  weapon: {fileID: 1354308263494022, guid: 63e9fcc8f1e62314fa09f79d5649bd4d, type: 2}
 --- !u!114 &114481208295962718
 MonoBehaviour:
   m_ObjectHideFlags: 1
