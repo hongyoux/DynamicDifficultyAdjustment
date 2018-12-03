@@ -4,10 +4,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(Player))]
 public class PlayerInputComponent : MonoBehaviour {
+    Player p;
+    private void Start()
+    {
+        p = this.GetComponent<Player>();
+    }
     // Update is called once per frame
-	void Update() {
-        Player p = this.GetComponent<Player>();
-
+    void Update() {
         if (p.stats.lives == 0)
         {
             return;

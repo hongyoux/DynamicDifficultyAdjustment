@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4848930814068134}
   - component: {fileID: 33290102005189648}
   - component: {fileID: 23772293902166022}
-  - component: {fileID: 114837645644589878}
-  - component: {fileID: 114605818621203684}
-  - component: {fileID: 61525659223282814}
   - component: {fileID: 50557547979951846}
+  - component: {fileID: 61740579413866878}
+  - component: {fileID: 114605818621203684}
+  - component: {fileID: 114275709921586498}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: PlayerBullet
@@ -107,7 +107,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61525659223282814
+--- !u!61 &61740579413866878
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -132,18 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114605818621203684
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1548051356718886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c2ef3013808fed4386e015f84f9cdef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114837645644589878
+--- !u!114 &114275709921586498
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,5 +147,16 @@ MonoBehaviour:
     damage: 1
     direction: {x: 0, y: 1}
     position: {x: 0, y: 0}
-    velocity: 30
+    velocity: 10
     acceleration: 0
+--- !u!114 &114605818621203684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1548051356718886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2ef3013808fed4386e015f84f9cdef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

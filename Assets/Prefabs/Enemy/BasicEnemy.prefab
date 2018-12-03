@@ -21,9 +21,11 @@ GameObject:
   - component: {fileID: 4437850539442746}
   - component: {fileID: 33988061798677342}
   - component: {fileID: 23860586614148830}
-  - component: {fileID: 114755798890352232}
   - component: {fileID: 58398616287074924}
   - component: {fileID: 50732403942547016}
+  - component: {fileID: 114755798890352232}
+  - component: {fileID: 114949486108473294}
+  - component: {fileID: 114225454268313714}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: EnemyShip
@@ -150,6 +152,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &114225454268313714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1867148370800892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec07eee85b3108d479bbd8098fc1ea24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114755798890352232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,9 +178,20 @@ MonoBehaviour:
     health: 10
     lives: 0
     position: {x: 0, y: 0}
-    movespeed: 0
+    movespeed: 4
     score: 0
     sprite: {fileID: 0}
     powerLevel: 0
   spawnPoint: {fileID: 4345057205828162}
   weapon: {fileID: 1404423011880528, guid: 0e402a63810749a40aed7b55b91615cf, type: 2}
+--- !u!114 &114949486108473294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1867148370800892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1c97346a6609fb49926934a0dbd036e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

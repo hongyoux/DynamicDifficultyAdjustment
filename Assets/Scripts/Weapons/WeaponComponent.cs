@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class WeaponComponent : MonoBehaviour {
     public float cooldown;
-    protected float currCooldown;
+    protected float nextFire;
     public GameObject bullet;
     public Transform[] spawnPoints;
 
     // Use this for initialization
     void Start () {
-        currCooldown = 0;
+        nextFire = 0;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        currCooldown = Mathf.Clamp(currCooldown - Time.deltaTime, 0f, float.MaxValue);
-    }
 
     public void Fire() { Fire(0); }
     virtual public void Fire(int level)
@@ -24,9 +19,21 @@ public class WeaponComponent : MonoBehaviour {
 
     }
 
+    public bool CanFire()
+    {
+        return Time.time > nextFire;
+    }
+
+    public void CoolingDown()
+    {
+        nextFire = Time.time + cooldown;
+    }
+
     protected void SpawnBullet(Transform spawnPoint)
     {
-        GameObject g = Instantiate(bullet, spawnPoint);
+        GameObject g = Instantiate<GameObject>(bullet);
+        g.transform.position = spawnPoint.position;
+
         BulletComponent b = g.GetComponent<BulletComponent>();
         b.stats.position = spawnPoint.position;
     }

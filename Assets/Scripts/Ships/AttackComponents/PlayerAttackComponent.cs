@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttackComponent : AttackComponent {
+    Player p;
+    WeaponComponent w;
+    private void Start()
+    {
+        p = GetComponent<Player>();
+        w = weapon.GetComponent<WeaponComponent>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        Player p = GetComponent<Player>();
         if (p.stats.lives == 0)
         {
             return;
@@ -14,7 +21,6 @@ public class PlayerAttackComponent : AttackComponent {
 
         if (Input.GetKey("space"))
         {
-            WeaponComponent w = weapon.GetComponent<WeaponComponent>();
             w.Fire(p.stats.powerLevel);
         }
     }

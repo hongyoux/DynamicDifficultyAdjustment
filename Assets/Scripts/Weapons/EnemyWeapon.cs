@@ -6,10 +6,12 @@ public class EnemyWeapon : WeaponComponent
 {
     public override void Fire(int level)
     {
-        if (currCooldown == 0)
+        if (!CanFire())
         {
-            SpawnBullet(spawnPoints[0]);
-            currCooldown = cooldown;
+            return;
         }
+        CoolingDown();
+
+        SpawnBullet(spawnPoints[0]);
     }
 }

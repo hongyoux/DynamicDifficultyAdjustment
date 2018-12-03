@@ -4,10 +4,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(BulletComponent))]
 public class BulletMovement : MonoBehaviour {
-	// Update is called once per frame
-	void Update () {
-        BulletComponent b = GetComponent<BulletComponent>();
-
+    BulletComponent b;
+    private void Start()
+    {
+        b = GetComponent<BulletComponent>();
+    }
+    // Update is called once per frame
+    void Update () {
         Vector2 newPos = b.stats.position;
         Vector2 change = b.stats.direction * (b.stats.velocity * Time.deltaTime);
 
