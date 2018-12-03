@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 50732403942547016}
   - component: {fileID: 114755798890352232}
   - component: {fileID: 114949486108473294}
-  - component: {fileID: 114225454268313714}
+  - component: {fileID: 114283269633702200}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: EnemyShip
@@ -152,7 +152,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &114225454268313714
+--- !u!114 &114283269633702200
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,9 +160,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1867148370800892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec07eee85b3108d479bbd8098fc1ea24, type: 3}
+  m_Script: {fileID: 11500000, guid: d4b5a084b5492a342bbbbc95e1b27d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  repeat: 1
+  ListOfWaypoints: {fileID: 1400442361524078, guid: e2a71a3f2a528044ab9d87e54a2102c1,
+    type: 2}
 --- !u!114 &114755798890352232
 MonoBehaviour:
   m_ObjectHideFlags: 1

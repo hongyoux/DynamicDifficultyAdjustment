@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyShip : Ship {
 	// Use this for initialization
 	void Start () {
-		
+        stats.position = transform.position;
 	}
 	
 	// Update is called once per frame
