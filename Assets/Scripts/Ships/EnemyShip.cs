@@ -10,11 +10,11 @@ public class EnemyShip : Ship {
 	
 	// Update is called once per frame
 	void Update () {
-	}
+
+    }
 
     public override void Destroy()
     {
-        Debug.Log("enemy down!");
         base.Destroy();
     }
 }

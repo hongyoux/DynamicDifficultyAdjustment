@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 23845557359005458}
   - component: {fileID: 114246079263200538}
   - component: {fileID: 114937368782307276}
-  - component: {fileID: 114481208295962718}
+  - component: {fileID: 114507767272855674}
   - component: {fileID: 61109462346730388}
   - component: {fileID: 50222035430432818}
   m_Layer: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
     powerLevel: 1
   spawnPoint: {fileID: 4086855289357870}
   weapon: {fileID: 1354308263494022, guid: 63e9fcc8f1e62314fa09f79d5649bd4d, type: 2}
---- !u!114 &114481208295962718
+--- !u!114 &114507767272855674
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1964102092428444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 401c029ece508f642ac00c65b7ec3b3c, type: 3}
+  m_Script: {fileID: 11500000, guid: 00069cfad01bbbb41b50c9fa85e937f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114937368782307276
