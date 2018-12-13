@@ -16,6 +16,12 @@ public class WaveData : MonoBehaviour {
     }
 
     public List<ShipData> waveData;
+    private List<ShipData> garbage;
+
+    private void Start()
+    {
+        garbage = new List<ShipData>();
+    }
 
     public void Update()
     {
@@ -23,13 +29,21 @@ public class WaveData : MonoBehaviour {
         {
             if (initialTime + s.spawnTime < Time.time)
             {
-                waveData.Remove(s);
+                garbage.Add(s);
                 SpawnShip(s);
             }
         }
+
+        foreach (ShipData s in garbage)
+        {
+            waveData.Remove(s);
+        }
+
+        garbage.Clear();
+        
         if (waveData.Count == 0)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 
@@ -43,7 +57,5 @@ public class WaveData : MonoBehaviour {
         GameObject ship = Instantiate(s.spawnType, s.spawnPoint.position, s.spawnPoint.rotation);
         EnemyPatternComponent epc = ship.AddComponent<EnemyPatternComponent>();
         epc.patternData = s.pattern;
-        ShipStats ss = ship.GetComponent<ShipStats>();
-        ss.position = s.spawnPoint.position;
     }
 }

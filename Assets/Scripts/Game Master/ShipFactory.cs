@@ -36,11 +36,15 @@ public class ShipFactory : MonoBehaviour {
     private Dictionary<string, Transform> spawnPoints;
     private Dictionary<string, GameObject> patternList;
 
+    private List<GameObject> cleanThese;
+
 	// Use this for initialization
 	void Start () {
         shipList = new Dictionary<string, GameObject>();
         spawnPoints = new Dictionary<string, Transform>();
         patternList = new Dictionary<string, GameObject>();
+
+        cleanThese = new List<GameObject>();
 
 		foreach(ShipDetails sd in ListOfShips) {
             shipList.Add(sd.name, sd.shipObject);
@@ -57,15 +61,23 @@ public class ShipFactory : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        foreach(GameObject w in waves)
+        
+        for (int i = 0; i < waves.Count; i++)
         {
-            WaveData wd = w.GetComponent<WaveData>();
+            WaveData wd = waves[i].GetComponent<WaveData>();
             if (wd.initialTime < Time.time)
             {
                 wd.Spawn();
 
-                waves.Remove(w);
+                cleanThese.Add(waves[i]);
             }
         }
+
+        foreach (GameObject g in cleanThese)
+        {
+            waves.Remove(g);
+        }
+
+        cleanThese.Clear();
 	}
 }
