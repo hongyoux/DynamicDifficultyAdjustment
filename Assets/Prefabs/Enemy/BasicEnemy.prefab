@@ -25,7 +25,6 @@ GameObject:
   - component: {fileID: 50732403942547016}
   - component: {fileID: 114755798890352232}
   - component: {fileID: 114949486108473294}
-  - component: {fileID: 114283269633702200}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: EnemyShip
@@ -68,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1867148370800892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.35, y: 11.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4345057205828162}
@@ -152,20 +151,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &114283269633702200
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1867148370800892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b5a084b5492a342bbbbc95e1b27d4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  repeat: 1
-  ListOfWaypoints: {fileID: 1400442361524078, guid: e2a71a3f2a528044ab9d87e54a2102c1,
-    type: 2}
 --- !u!114 &114755798890352232
 MonoBehaviour:
   m_ObjectHideFlags: 1

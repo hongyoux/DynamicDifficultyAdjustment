@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1500584640098976}
+  m_IsPrefabAsset: 1
+--- !u!1 &1500584640098976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4819244653321806}
+  - component: {fileID: 114169383464110960}
+  m_Layer: 0
+  m_Name: DebugTestWave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4819244653321806
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1500584640098976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114169383464110960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1500584640098976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f0431208f16aab4bbd2b97dd894ae60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialTime: 1
+  waveData:
+  - spawnTime: 0
+    spawnPoint: {fileID: 4781287160175034, guid: 32f99319426e2f749b9bc7c7247242bb,
+      type: 2}
+    spawnType: {fileID: 1867148370800892, guid: 849b7cf232eba2845833d8a23c6e3642,
+      type: 2}
+    pattern: {fileID: 1400442361524078, guid: e2a71a3f2a528044ab9d87e54a2102c1, type: 2}
+  - spawnTime: 0.25
+    spawnPoint: {fileID: 4850105172942734, guid: 32f99319426e2f749b9bc7c7247242bb,
+      type: 2}
+    spawnType: {fileID: 1867148370800892, guid: 849b7cf232eba2845833d8a23c6e3642,
+      type: 2}
+    pattern: {fileID: 1400442361524078, guid: e2a71a3f2a528044ab9d87e54a2102c1, type: 2}
+  - spawnTime: 0.5
+    spawnPoint: {fileID: 4268086028334672, guid: 32f99319426e2f749b9bc7c7247242bb,
+      type: 2}
+    spawnType: {fileID: 1867148370800892, guid: 849b7cf232eba2845833d8a23c6e3642,
+      type: 2}
+    pattern: {fileID: 1400442361524078, guid: e2a71a3f2a528044ab9d87e54a2102c1, type: 2}
+  - spawnTime: 0.75
+    spawnPoint: {fileID: 4422905896883362, guid: 32f99319426e2f749b9bc7c7247242bb,
+      type: 2}
+    spawnType: {fileID: 1867148370800892, guid: 849b7cf232eba2845833d8a23c6e3642,
+      type: 2}
+    pattern: {fileID: 1400442361524078, guid: e2a71a3f2a528044ab9d87e54a2102c1, type: 2}
+  - spawnTime: 1
+    spawnPoint: {fileID: 4751954703997814, guid: 32f99319426e2f749b9bc7c7247242bb,
+      type: 2}
+    spawnType: {fileID: 1867148370800892, guid: 849b7cf232eba2845833d8a23c6e3642,
+      type: 2}
+    pattern: {fileID: 1400442361524078, guid: e2a71a3f2a528044ab9d87e54a2102c1, type: 2}

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPattern : MonoBehaviour {
-    public bool repeat;
-    public GameObject ListOfWaypoints;
+public class EnemyPatternComponent : MonoBehaviour {
+    public GameObject patternData;
+
     private int currentWaypoint;
     private List<Transform> waypoints;
+    private bool repeat;
 
     private Ship s;
 
@@ -14,8 +15,11 @@ public class EnemyPattern : MonoBehaviour {
     {
         s = GetComponent<Ship>();
 
-        waypoints = new List<Transform>(ListOfWaypoints.GetComponentsInChildren<Transform>());
+        waypoints = new List<Transform>(patternData.GetComponentsInChildren<Transform>());
         waypoints.RemoveAt(0);
+
+        PatternData pd = patternData.GetComponent<PatternData>();
+        repeat = pd.repeat;
 
         currentWaypoint = 0;
     }
