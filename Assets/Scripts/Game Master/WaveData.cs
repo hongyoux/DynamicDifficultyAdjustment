@@ -44,7 +44,7 @@ public class WaveData : MonoBehaviour {
 
     private void SpawnShip(ShipData s)
     {
-        GameObject ship = Instantiate(s.spawnType, s.spawnPoint.position, s.spawnPoint.rotation);
+        GameObject ship = Instantiate(s.spawnType, s.spawnPoint.position, s.spawnPoint.rotation, Gamemaster.ships.transform);
         EnemyPatternComponent epc = ship.AddComponent<EnemyPatternComponent>();
         epc.patternData = s.pattern;
     }

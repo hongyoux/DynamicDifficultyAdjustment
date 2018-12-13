@@ -7,13 +7,17 @@ public class Ship : MonoBehaviour {
     public Transform spawnPoint;
     public GameObject weapon;
 
+    protected Gamemaster gm;
+
     // Use this for initialization
     void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        stats.position = transform.position;
+        GameObject g = GameObject.Find("GameMaster");
+        gm = g.GetComponent<Gamemaster>();
+    }
+
+    // Update is called once per frame
+    void Update () {
 	}
 
     virtual public void Destroy()
