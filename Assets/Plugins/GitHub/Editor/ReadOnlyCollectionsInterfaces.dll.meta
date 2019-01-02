@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 48c22d5d7479fcb49ab3be0cdd2ccec0
-timeCreated: 1543108883
+timeCreated: 1491391260
 licenseType: Free
 PluginImporter:
   serializedVersion: 2
@@ -11,7 +11,7 @@ PluginImporter:
   platformData:
     data:
       first:
-        Any: 
+        Any:
       second:
         enabled: 0
         settings: {}
@@ -19,7 +19,7 @@ PluginImporter:
       first:
         Editor: Editor
       second:
-        enabled: 1
+        enabled: 0
         settings:
           DefaultValueInitialized: true
     data:
@@ -29,6 +29,6 @@ PluginImporter:
         enabled: 0
         settings:
           CPU: AnyCPU
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  userData:
+  assetBundleName:
+  assetBundleVariant:
