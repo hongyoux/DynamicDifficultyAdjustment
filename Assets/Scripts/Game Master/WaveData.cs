@@ -3,63 +3,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveData : MonoBehaviour {
-    public float initialTime;
+public class WaveData : MonoBehaviour
+{
+  public float initialTime;
 
-    [Serializable]
-    public struct ShipData
+  [Serializable]
+  public struct ShipData
+  {
+    public float spawnTime;
+    public Transform spawnPoint;
+    public GameObject spawnType;
+    public GameObject pattern;
+  }
+
+  public List<ShipData> waveData;
+  private List<ShipData> garbage;
+
+  private void Start()
+  {
+    garbage = new List<ShipData>();
+  }
+
+  public void Update()
+  {
+    foreach (ShipData s in waveData)
     {
-        public float spawnTime;
-        public Transform spawnPoint;
-        public GameObject spawnType;
-        public GameObject pattern;
+      if (initialTime + s.spawnTime < Time.time)
+      {
+        garbage.Add(s);
+        SpawnShip(s);
+      }
     }
 
-    public List<ShipData> waveData;
-    private List<ShipData> garbage;
+    CleanUp();
+  }
 
-    private void Start()
+  public void Spawn()
+  {
+    Instantiate(this);
+  }
+
+  private void SpawnShip(ShipData s)
+  {
+    GameObject ship = Instantiate(s.spawnType, s.spawnPoint.position, s.spawnPoint.rotation, Gamemaster.ships.transform);
+    EnemyPatternComponent epc = ship.AddComponent<EnemyPatternComponent>();
+    epc.patternData = s.pattern;
+  }
+
+  private void CleanUp()
+  {
+    foreach (ShipData s in garbage)
     {
-        garbage = new List<ShipData>();
+      waveData.Remove(s);
     }
+    garbage.Clear();
 
-    public void Update()
+    if (waveData.Count == 0)
     {
-        foreach (ShipData s in waveData)
-        {
-            if (initialTime + s.spawnTime < Time.time)
-            {
-                garbage.Add(s);
-                SpawnShip(s);
-            }
-        }
-
-        CleanUp();
+      Destroy(gameObject);
     }
-
-    public void Spawn()
-    {
-        Instantiate(this);
-    }
-
-    private void SpawnShip(ShipData s)
-    {
-        GameObject ship = Instantiate(s.spawnType, s.spawnPoint.position, s.spawnPoint.rotation, Gamemaster.ships.transform);
-        EnemyPatternComponent epc = ship.AddComponent<EnemyPatternComponent>();
-        epc.patternData = s.pattern;
-    }
-
-    private void CleanUp()
-    {
-        foreach (ShipData s in garbage)
-        {
-            waveData.Remove(s);
-        }
-        garbage.Clear();
-
-        if (waveData.Count == 0)
-        {
-            Destroy(gameObject);
-        }
-    }
+  }
 }

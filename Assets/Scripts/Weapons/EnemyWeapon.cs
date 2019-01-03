@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EnemyWeapon : WeaponComponent
 {
-    public override void Fire(int level)
+  public override void Fire(int level)
+  {
+    if (!CanFire())
     {
-        if (!CanFire())
-        {
-            return;
-        }
-        CoolingDown();
-
-        SpawnBullet(spawnPoints[0]);
+      return;
     }
+    CoolingDown();
+
+    SpawnBullet(spawnPoints[0]);
+  }
 }

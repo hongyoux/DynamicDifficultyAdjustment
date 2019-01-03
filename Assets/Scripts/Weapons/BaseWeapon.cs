@@ -2,53 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseWeapon : WeaponComponent {
-    public override void Fire(int level)
+public class BaseWeapon : WeaponComponent
+{
+  public override void Fire(int level)
+  {
+    if (!CanFire())
     {
-        if (!CanFire())
-        {
-            return;
-        }
-        CoolingDown();
+      return;
+    }
+    CoolingDown();
 
-        // Can fire
-        switch (level)
+    // Can fire
+    switch (level)
+    {
+      case 1:
         {
-            case 1:
-                {
-                    SpawnBullet(spawnPoints[0]);
-                    break;
-                }
-            case 2:
-                {
-                    SpawnBullet(spawnPoints[1]);
-                    SpawnBullet(spawnPoints[2]);
-                    break;
-                }
-            case 3:
-                {
-                    SpawnBullet(spawnPoints[0]);
-                    SpawnBullet(spawnPoints[1]);
-                    SpawnBullet(spawnPoints[2]);
-                    break;
-                }
-            case 4:
-                {
-                    SpawnBullet(spawnPoints[1]);
-                    SpawnBullet(spawnPoints[2]);
-                    SpawnBullet(spawnPoints[3]);
-                    SpawnBullet(spawnPoints[4]);
-                    break;
-                }
-            case 5:
-                {
-                    SpawnBullet(spawnPoints[0]);
-                    SpawnBullet(spawnPoints[1]);
-                    SpawnBullet(spawnPoints[2]);
-                    SpawnBullet(spawnPoints[3]);
-                    SpawnBullet(spawnPoints[4]);
-                    break;
-                }
+          SpawnBullet(spawnPoints[0]);
+          break;
+        }
+      case 2:
+        {
+          SpawnBullet(spawnPoints[1]);
+          SpawnBullet(spawnPoints[2]);
+          break;
+        }
+      case 3:
+        {
+          SpawnBullet(spawnPoints[0]);
+          SpawnBullet(spawnPoints[1]);
+          SpawnBullet(spawnPoints[2]);
+          break;
+        }
+      case 4:
+        {
+          SpawnBullet(spawnPoints[1]);
+          SpawnBullet(spawnPoints[2]);
+          SpawnBullet(spawnPoints[3]);
+          SpawnBullet(spawnPoints[4]);
+          break;
+        }
+      case 5:
+        {
+          SpawnBullet(spawnPoints[0]);
+          SpawnBullet(spawnPoints[1]);
+          SpawnBullet(spawnPoints[2]);
+          SpawnBullet(spawnPoints[3]);
+          SpawnBullet(spawnPoints[4]);
+          break;
         }
     }
+  }
 }

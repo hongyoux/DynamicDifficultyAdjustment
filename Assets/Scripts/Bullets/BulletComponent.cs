@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletComponent : MonoBehaviour {
-    public BulletStats stats;
+public class BulletComponent : MonoBehaviour
+{
+  public BulletStats stats;
 }

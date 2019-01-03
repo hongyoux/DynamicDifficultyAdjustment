@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatternData : MonoBehaviour {
-    public bool repeat;
+public class PatternData : MonoBehaviour
+{
+  public bool repeat;
 }
