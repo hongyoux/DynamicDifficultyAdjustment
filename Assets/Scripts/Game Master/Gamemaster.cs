@@ -12,10 +12,13 @@ public class Gamemaster : MonoBehaviour
   public static GameObject waves;
 
   private Player p;
+  private UIComponent uiComponent;
   
   // Use this for initialization
   void Start()
   {
+    uiComponent = transform.GetComponent<UIComponent>();
+
     bullets = new GameObject("bullets");
     bullets.transform.parent = transform;
 
@@ -32,7 +35,7 @@ public class Gamemaster : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-
+    uiComponent.UpdateUI(p.stats.health, p.stats.lives, p.stats.score, 0.0f);
   }
 
   public void UpdatePlayerScore(int score)
