@@ -40,7 +40,7 @@ public class WaveData : MonoBehaviour
 
   public void Spawn()
   {
-    Instantiate(this);
+    Instantiate(this, Gamemaster.waves.transform);
   }
 
   private void SpawnShip(ShipData s)

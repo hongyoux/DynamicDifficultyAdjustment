@@ -9,19 +9,23 @@ public class Gamemaster : MonoBehaviour
 
   public static GameObject bullets;
   public static GameObject ships;
+  public static GameObject waves;
 
   private Player p;
-
-  private void Awake()
-  {
-    bullets = transform.Find("bullets").gameObject;
-    ships = transform.Find("ships").gameObject;
-  }
-
+  
   // Use this for initialization
   void Start()
   {
-    GameObject pObj = Instantiate(player, playerSpawnLocation.position, playerSpawnLocation.rotation);
+    bullets = new GameObject("bullets");
+    bullets.transform.parent = transform;
+
+    ships = new GameObject("ships");
+    ships.transform.parent = transform;
+
+    waves = new GameObject("waves");
+    waves.transform.parent = transform;
+
+    GameObject pObj = Instantiate(player, playerSpawnLocation.position, playerSpawnLocation.rotation, ships.transform);
     p = pObj.GetComponent<Player>();
   }
 
