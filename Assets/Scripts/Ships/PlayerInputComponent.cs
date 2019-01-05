@@ -39,8 +39,11 @@ public class PlayerInputComponent : MonoBehaviour
       newPos.x += speed;
     }
 
-    newPos.x = Mathf.Clamp(newPos.x, -5f, 5f);
-    newPos.y = Mathf.Clamp(newPos.y, -9.5f, 9.5f);
+    float boundX = 5f - transform.localScale.x / 2;
+    float boundY = 10f - transform.localScale.y / 2;
+
+    newPos.x = Mathf.Clamp(newPos.x, -boundX, boundX);
+    newPos.y = Mathf.Clamp(newPos.y, -boundY, boundY);
 
     p.stats.position = newPos;
     transform.position = newPos;

@@ -16,6 +16,8 @@ public class Ship : MonoBehaviour
     stats.position = transform.position;
     GameObject g = GameObject.Find("GameMaster");
     gm = g.GetComponent<Gamemaster>();
+
+    stats.currHealth = stats.maxHealth;
   }
 
   // Update is called once per frame
@@ -23,8 +25,13 @@ public class Ship : MonoBehaviour
   {
   }
 
-  virtual public void Destroy()
+  virtual protected void Destroy()
   {
     Destroy(gameObject);
+  }
+
+  virtual public void TakeDamage(int damage)
+  {
+    stats.currHealth -= damage;
   }
 }

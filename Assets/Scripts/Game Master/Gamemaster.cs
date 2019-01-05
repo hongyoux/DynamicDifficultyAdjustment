@@ -35,7 +35,7 @@ public class Gamemaster : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    uiComponent.UpdateUI(p.stats.health, p.stats.lives, p.stats.score, 0.0f);
+    uiComponent.UpdateUI(p.stats.currHealth, p.stats.lives, p.stats.score, 0.0f);
   }
 
   public void UpdatePlayerScore(int score)

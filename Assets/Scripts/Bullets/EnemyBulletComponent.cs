@@ -10,12 +10,7 @@ public class EnemyBulletComponent : BulletComponent
     {
       GameObject player = collision.gameObject;
       Ship playerShip = player.GetComponent<Ship>();
-      playerShip.stats.health -= stats.damage;
-
-      if (playerShip.stats.health <= 0)
-      {
-        playerShip.Destroy();
-      }
+      playerShip.TakeDamage(stats.damage);
 
       Destroy(gameObject);
     }
