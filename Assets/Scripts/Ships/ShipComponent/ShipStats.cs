@@ -13,6 +13,5 @@ public class ShipStats
   public Vector2 position;
   public float movespeed;
   public int score;
-  public Sprite sprite;
   public int powerLevel;
 }

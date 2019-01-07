@@ -9,7 +9,7 @@ public class Player : Ship
   {
     if (stats.currHealth <= 0)
     {
-      if (stats.lives > 0)
+      if (stats.lives > 1)
       {
         stats.lives -= 1;
         stats.currHealth = stats.maxHealth;

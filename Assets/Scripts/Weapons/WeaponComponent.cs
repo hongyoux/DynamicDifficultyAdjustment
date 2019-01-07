@@ -31,12 +31,14 @@ public class WeaponComponent : MonoBehaviour
     nextFire = Time.time + cooldown;
   }
 
-  protected void SpawnBullet(Transform spawnPoint)
+  protected GameObject SpawnBullet(Transform spawnPoint)
   {
     GameObject g = Instantiate<GameObject>(bullet, Gamemaster.bullets.transform);
     g.transform.position = spawnPoint.position;
 
     BulletComponent b = g.GetComponent<BulletComponent>();
     b.stats.position = spawnPoint.position;
+
+    return g;
   }
 }

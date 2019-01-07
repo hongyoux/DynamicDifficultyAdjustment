@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseWeapon : WeaponComponent
+public class BasePlayerWeapon : WeaponComponent
 {
   public override void Fire(int level)
   {

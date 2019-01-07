@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BulletComponent))]
-public class BulletMovement : MonoBehaviour
+public class BaseBulletMovement : MonoBehaviour
 {
   BulletComponent b;
   private void Start()

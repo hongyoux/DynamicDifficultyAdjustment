@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     currHealth: 0
-    maxHealth: 100
+    maxHealth: 1
     lives: 3
     position: {x: 0, y: 0}
     movespeed: 10
