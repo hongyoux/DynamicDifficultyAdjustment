@@ -38,6 +38,11 @@ public class Gamemaster : MonoBehaviour
     uiComponent.UpdateUI(p.stats.currHealth, p.stats.lives, p.stats.score, 0.0f);
   }
 
+  public Player GetPlayer()
+  {
+    return p;
+  }
+
   public void UpdatePlayerScore(int score)
   {
     p.stats.score += score;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class EnemyAttackComponent : AttackComponent
+public class BasicEnemyAttackComponent : AttackComponent
 {
   WeaponComponent w;
   private void Start()
