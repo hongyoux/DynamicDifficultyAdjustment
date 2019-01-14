@@ -5,10 +5,14 @@ using UnityEngine;
 public class ChaseEnemyWeapon : WeaponComponent
 {
   private Gamemaster gm;
+
+  Vector3 targetPos;
+
   private void Start()
   {
     GameObject g = GameObject.Find("GameMaster");
     gm = g.GetComponent<Gamemaster>();
+    targetPos = new Vector3(0, -10, 1);
   }
 
   public override void Fire(int level)
@@ -21,7 +25,11 @@ public class ChaseEnemyWeapon : WeaponComponent
 
     GameObject b = SpawnBullet(spawnPoints[0]);
     ChaseBulletMovement cbm = b.GetComponent<ChaseBulletMovement>();
-    Vector3 playerPos = gm.GetPlayer().transform.position;
-    cbm.SetTarget(playerPos);
+    Player p = gm.GetPlayer();
+    if (p != null)
+    {
+      targetPos = p.transform.position;
+    }
+    cbm.SetTarget(targetPos);
   }
 }

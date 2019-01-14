@@ -6,15 +6,21 @@ using UnityEngine;
 public class ChaseBulletMovement : MonoBehaviour
 {
   BulletComponent b;
+  bool stopped;
 
   private void Awake()
   {
     b = GetComponent<BulletComponent>();
+    stopped = true;
   }
 
   // Update is called once per frame
   void Update()
   {
+    if (stopped)
+    {
+      return;
+    }
     Vector3 currentPos = transform.position;
     float acceleratedAmount = b.stats.acceleration * Time.deltaTime;
     Vector3 change = b.stats.direction * ((b.stats.velocity + b.stats.acceleration) * Time.deltaTime);
@@ -30,6 +36,7 @@ public class ChaseBulletMovement : MonoBehaviour
   {
     Vector2 direction = pos - transform.position;
     b.stats.direction = direction.normalized;
+    stopped = false;
   }
 
   void CheckOutOfBounds()
@@ -39,5 +46,10 @@ public class ChaseBulletMovement : MonoBehaviour
     {
       Destroy(gameObject);
     }
+  }
+
+  public void StopTargetting()
+  {
+    stopped = true;
   }
 }
