@@ -8,6 +8,7 @@ public class ShipStats
   [HideInInspector]
   public int currHealth;
 
+  public string name;
   public int maxHealth;
   public int lives;
   public Vector2 position;

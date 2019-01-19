@@ -8,7 +8,7 @@ public class EnemyPatternComponent : MonoBehaviour
 
   private int currentWaypoint;
   private List<Transform> waypoints;
-  private bool repeat;
+  private PatternData pd;
 
   private Ship s;
 
@@ -16,11 +16,15 @@ public class EnemyPatternComponent : MonoBehaviour
   {
     s = GetComponent<Ship>();
 
+    pd = patternData.GetComponent<PatternData>();
+
     waypoints = new List<Transform>(patternData.GetComponentsInChildren<Transform>());
     waypoints.RemoveAt(0);
 
-    PatternData pd = patternData.GetComponent<PatternData>();
-    repeat = pd.repeat;
+    if (pd.reverse)
+    {
+      waypoints.Reverse();
+    }
 
     currentWaypoint = 0;
   }
@@ -30,7 +34,7 @@ public class EnemyPatternComponent : MonoBehaviour
   {
     if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) <= (s.stats.movespeed * Time.deltaTime))
     {
-      if (repeat)
+      if (pd.repeat)
       {
         currentWaypoint = (currentWaypoint + 1) % waypoints.Count;
       }
@@ -39,6 +43,13 @@ public class EnemyPatternComponent : MonoBehaviour
         if (currentWaypoint != waypoints.Count - 1)
         {
           currentWaypoint++;
+        }
+        else
+        {
+          if (pd.dieAtEnd)
+          {
+            Destroy(gameObject);
+          }
         }
       }
     }

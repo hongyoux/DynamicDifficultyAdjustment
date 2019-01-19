@@ -5,4 +5,6 @@ using UnityEngine;
 public class PatternData : MonoBehaviour
 {
   public bool repeat;
+  public bool dieAtEnd;
+  public bool reverse;
 }

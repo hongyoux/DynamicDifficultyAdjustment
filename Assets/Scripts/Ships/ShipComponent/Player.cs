@@ -17,7 +17,15 @@ public class Player : Ship
       else
       {
         Destroy();
+
+        // Quit right after
+        Application.Quit();
       }
     }
+  }
+  public override void TakeDamage(int damage) 
+  {
+    gm.LogDamage(stats.currHealth);
+    base.TakeDamage(damage);
   }
 }

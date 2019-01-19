@@ -4,4 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/DynamicDifficultyAdjustment.unity
+    guid: f0674882625afd3419e2f55af9b2e00f
+  m_configObjects: {}

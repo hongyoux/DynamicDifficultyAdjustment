@@ -133,12 +133,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     currHealth: 0
+    name: BasicEnemy
     maxHealth: 10
     lives: 0
     position: {x: 0, y: 0}
     movespeed: 4
     score: 50
-    sprite: {fileID: 0}
     powerLevel: 0
   spawnPoint: {fileID: 4345057205828162}
   weapon: {fileID: 1404423011880528, guid: 0e402a63810749a40aed7b55b91615cf, type: 3}

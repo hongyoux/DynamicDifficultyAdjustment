@@ -173,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     currHealth: 0
+    name: ChaseEnemy
     maxHealth: 10
     lives: 0
     position: {x: 0, y: 0}
