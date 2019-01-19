@@ -146,7 +146,9 @@ public class Gamemaster : MonoBehaviour
   private void CreateLogFile()
   {
     string dateTime = DateTime.Now.ToString("MM-dd-yy_h-mm-ss-ff");
-    logName = Application.dataPath + string.Format("DDA-{0}.log", dateTime);
+    int dirSlash = Application.dataPath.LastIndexOf("/");
+
+    logName = Application.dataPath.Substring(0, dirSlash) + string.Format("/DDA-{0}.log", dateTime);
     Debug.Log(logName);
     File.Create(logName);
   }
