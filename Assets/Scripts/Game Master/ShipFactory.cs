@@ -20,22 +20,12 @@ public class ShipFactory : MonoBehaviour
     public GameObject location;
   }
 
-  [Serializable]
-  public struct Pattern
-  {
-    public string name;
-    public GameObject pattern;
-  }
-
   public ShipDetails[] ListOfShips;
-  public SpawnPoint[] SpawnPoints;
-  public Pattern[] patterns;
 
+  public List<GameObject> patterns;
   public List<GameObject> waves;
 
   private Dictionary<string, GameObject> shipList;
-  private Dictionary<string, Transform> spawnPoints;
-  private Dictionary<string, GameObject> patternList;
 
   private List<GameObject> cleanThese;
 
@@ -46,22 +36,12 @@ public class ShipFactory : MonoBehaviour
   void Start()
   {
     shipList = new Dictionary<string, GameObject>();
-    spawnPoints = new Dictionary<string, Transform>();
-    patternList = new Dictionary<string, GameObject>();
 
     cleanThese = new List<GameObject>();
 
     foreach (ShipDetails sd in ListOfShips)
     {
       shipList.Add(sd.name, sd.shipObject);
-    }
-    foreach (SpawnPoint sp in SpawnPoints)
-    {
-      spawnPoints.Add(sp.name, sp.location.transform);
-    }
-    foreach (Pattern p in patterns)
-    {
-      patternList.Add(p.name, p.pattern);
     }
 
     timeBetweenWaves = 10;

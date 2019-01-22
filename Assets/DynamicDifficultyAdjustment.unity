@@ -245,14 +245,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameMaster
       objectReference: {fileID: 0}
-    - target: {fileID: 919394574, guid: 883c16db99981e945ad11450169c8adf, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 148
-      objectReference: {fileID: 0}
-    - target: {fileID: 1007354883, guid: 883c16db99981e945ad11450169c8adf, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 98
-      objectReference: {fileID: 0}
     - target: {fileID: 4538903766669876, guid: 883c16db99981e945ad11450169c8adf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -297,68 +289,64 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114979095371962074, guid: 883c16db99981e945ad11450169c8adf,
+    - target: {fileID: 114874277012663050, guid: 883c16db99981e945ad11450169c8adf,
         type: 3}
-      propertyPath: writeImmediately
-      value: 1
+      propertyPath: SpawnPoints.Array.size
+      value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 4703197810607901869, guid: 883c16db99981e945ad11450169c8adf,
+    - target: {fileID: 114874277012663050, guid: 883c16db99981e945ad11450169c8adf,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 3
+      propertyPath: Waypoints.Array.size
+      value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 7738571434814542349, guid: 883c16db99981e945ad11450169c8adf,
+    - target: {fileID: 114874277012663050, guid: 883c16db99981e945ad11450169c8adf,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -11.5
+      propertyPath: SpawnPoints.Array.data[6].name
+      value: DownRightRight
       objectReference: {fileID: 0}
-    - target: {fileID: 7738571435290443541, guid: 883c16db99981e945ad11450169c8adf,
+    - target: {fileID: 114874277012663050, guid: 883c16db99981e945ad11450169c8adf,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 98
+      propertyPath: SpawnPoints.Array.data[5].name
+      value: DownRightRight
       objectReference: {fileID: 0}
-    - target: {fileID: 7738571435290443541, guid: 883c16db99981e945ad11450169c8adf,
+    - target: {fileID: 114874277012663050, guid: 883c16db99981e945ad11450169c8adf,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7738571435345404956, guid: 883c16db99981e945ad11450169c8adf,
+      propertyPath: SpawnPoints.Array.data[5].location
+      value: 
+      objectReference: {fileID: 1717458628}
+    - target: {fileID: 114874277012663050, guid: 883c16db99981e945ad11450169c8adf,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 11.5
+      propertyPath: SpawnPoints.Array.data[7].name
+      value: DownRightRight
       objectReference: {fileID: 0}
+    - target: {fileID: 114874277012663050, guid: 883c16db99981e945ad11450169c8adf,
+        type: 3}
+      propertyPath: SpawnPoints.Array.data[7].location
+      value: 
+      objectReference: {fileID: 1717458628}
+    - target: {fileID: 114874277012663050, guid: 883c16db99981e945ad11450169c8adf,
+        type: 3}
+      propertyPath: SpawnPoints.Array.data[8].name
+      value: DownRightRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 114874277012663050, guid: 883c16db99981e945ad11450169c8adf,
+        type: 3}
+      propertyPath: SpawnPoints.Array.data[8].location
+      value: 
+      objectReference: {fileID: 1717458628}
     - target: {fileID: 7738571435367438379, guid: 883c16db99981e945ad11450169c8adf,
         type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 324600173}
-    - target: {fileID: 7738571435804021101, guid: 883c16db99981e945ad11450169c8adf,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7738571436284505492, guid: 883c16db99981e945ad11450169c8adf,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7738571436400060990, guid: 883c16db99981e945ad11450169c8adf,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 148
-      objectReference: {fileID: 0}
-    - target: {fileID: 7738571436400060990, guid: 883c16db99981e945ad11450169c8adf,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5383883725908879026, guid: 883c16db99981e945ad11450169c8adf,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 883c16db99981e945ad11450169c8adf, type: 3}
+--- !u!1 &1717458628 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1274706965967510, guid: 883c16db99981e945ad11450169c8adf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1591137630}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1852151626
 GameObject:
   m_ObjectHideFlags: 0

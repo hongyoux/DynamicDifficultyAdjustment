@@ -18,9 +18,7 @@ public class EnemyPatternComponent : MonoBehaviour
 
     pd = patternData.GetComponent<PatternData>();
 
-    waypoints = new List<Transform>(patternData.GetComponentsInChildren<Transform>());
-    waypoints.RemoveAt(0);
-
+    waypoints = pd.waypoints;
     if (pd.reverse)
     {
       waypoints.Reverse();
