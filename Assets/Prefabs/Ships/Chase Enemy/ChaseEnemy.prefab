@@ -174,10 +174,10 @@ MonoBehaviour:
   stats:
     currHealth: 0
     name: ChaseEnemy
-    maxHealth: 10
+    maxHealth: 4
     lives: 0
     position: {x: 0, y: 0}
-    movespeed: 6
+    movespeed: 3
     score: 120
     powerLevel: 0
   spawnPoint: {fileID: 443633323}

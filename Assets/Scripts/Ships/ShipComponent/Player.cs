@@ -7,22 +7,21 @@ public class Player : Ship
   // Update is called once per frame
   void Update()
   {
-    if (stats.currHealth <= 0)
+    if (stats.lives >= 1)
     {
-      if (stats.lives > 1)
+      if (stats.currHealth <= 0)
       {
         stats.lives -= 1;
         stats.currHealth = stats.maxHealth;
       }
-      else
-      {
-        Destroy();
-
-        // Quit right after
-        Application.Quit();
-      }
+    }
+    else
+    {
+      GetComponent<Renderer>().enabled = false;
+      gm.Stop();
     }
   }
+
   public override void TakeDamage(int damage) 
   {
     gm.LogDamage(stats.currHealth);

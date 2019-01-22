@@ -20,9 +20,6 @@ public class PlayerAttackComponent : AttackComponent
       return;
     }
 
-    if (Input.GetKey("space"))
-    {
-      w.Fire(p.stats.powerLevel);
-    }
+    w.Fire(p.stats.powerLevel);
   }
 }

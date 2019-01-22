@@ -5,46 +5,20 @@ using UnityEngine;
 
 public class ShipFactory : MonoBehaviour
 {
-  // Hack to get dictionary to show up in the inspector
-  [Serializable]
-  public struct ShipDetails
-  {
-    public string name;
-    public GameObject shipObject;
-  }
-
-  [Serializable]
-  public struct SpawnPoint
-  {
-    public string name;
-    public GameObject location;
-  }
-
-  public ShipDetails[] ListOfShips;
-
-  public List<GameObject> patterns;
   public List<GameObject> waves;
-
-  private Dictionary<string, GameObject> shipList;
-
   private List<GameObject> cleanThese;
 
   private float cooldown;
   private float timeBetweenWaves;
 
+  private bool stopped;
+
   // Use this for initialization
   void Start()
   {
-    shipList = new Dictionary<string, GameObject>();
-
     cleanThese = new List<GameObject>();
 
-    foreach (ShipDetails sd in ListOfShips)
-    {
-      shipList.Add(sd.name, sd.shipObject);
-    }
-
-    timeBetweenWaves = 10;
+    timeBetweenWaves = 5;
 
     cooldown = Time.time + timeBetweenWaves;
   }
@@ -52,6 +26,10 @@ public class ShipFactory : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    if (stopped)
+    {
+      return;
+    }
     if (Time.time >= cooldown)
     {
       SpawnRandomWave();
@@ -59,10 +37,23 @@ public class ShipFactory : MonoBehaviour
     }
   }
 
+  public void Reset()
+  {
+    cooldown = Time.time + timeBetweenWaves;
+    stopped = false;
+  }
+
+  public void Stop()
+  {
+    stopped = true;
+  }
+
   void SpawnRandomWave()
   {
     int index = UnityEngine.Random.Range(0, waves.Count);
-    WaveData wd = waves[index].GetComponent<WaveData>();
-    wd.Spawn();
+    Debug.Log(index);
+    GameObject newWave = Instantiate(waves[index], Gamemaster.waves.transform);
+    WaveData wd = newWave.GetComponent<WaveData>();
+    wd.SpawnWave();
   }
 }

@@ -16,7 +16,9 @@ public class Gamemaster : MonoBehaviour
 
   private string logName;
   private StreamWriter sw;
-  
+
+  private ShipFactory sf;
+
   enum LogDataType
   {
     DAMAGE, SPAWN, KILL, SCORE
@@ -40,6 +42,7 @@ public class Gamemaster : MonoBehaviour
     logs = new List<LogEntry>();
 
     uiComponent = transform.GetComponent<UIComponent>();
+    sf = GetComponentInChildren<ShipFactory>();
 
     bullets = new GameObject("bullets");
     bullets.transform.parent = transform;
@@ -52,6 +55,31 @@ public class Gamemaster : MonoBehaviour
 
     GameObject pObj = Instantiate(player, playerSpawnLocation.position, playerSpawnLocation.rotation, ships.transform);
     p = pObj.GetComponent<Player>();
+  }
+
+  public void Reset()
+  {
+    Stop();
+
+    bullets = new GameObject("bullets");
+    bullets.transform.parent = transform;
+
+    ships = new GameObject("ships");
+    ships.transform.parent = transform;
+
+    waves = new GameObject("waves");
+    waves.transform.parent = transform;
+
+    sf.Reset();
+  }
+
+  public void Stop()
+  {
+    Destroy(bullets);
+    Destroy(ships);
+    Destroy(waves);
+
+    sf.Stop();
   }
 
   // Update is called once per frame

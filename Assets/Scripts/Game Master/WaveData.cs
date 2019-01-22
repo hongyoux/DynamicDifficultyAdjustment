@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class WaveData : MonoBehaviour
 {
-  public float initialTime;
+  private float initialTime;
+
+  private bool active;
 
   [Serializable]
   public struct ShipData
@@ -20,19 +22,24 @@ public class WaveData : MonoBehaviour
 
   private Gamemaster gm;
 
-  private void Start()
+  private void Awake()
   {
     GameObject g = GameObject.Find("GameMaster");
     gm = g.GetComponent<Gamemaster>();
 
     garbage = new List<ShipData>();
+    initialTime = Time.time;
   }
 
   public void Update()
   {
+    if (!active)
+    {
+      return;
+    }
     foreach (ShipData s in waveData)
     {
-      if (initialTime + s.spawnTime < Time.time)
+      if (Time.time >= initialTime + s.spawnTime)
       {
         garbage.Add(s);
         SpawnShip(s);
@@ -42,23 +49,25 @@ public class WaveData : MonoBehaviour
     CleanUp();
   }
 
-  public void Spawn()
+  public void SpawnWave()
   {
-    Instantiate(this, Gamemaster.waves.transform);
+    active = true;
   }
 
   private void SpawnShip(ShipData s)
   {
-    PatternData pattern = s.pattern.GetComponent<PatternData>();
-    Transform spawnPoint = pattern.waypoints[0];
-    pattern.waypoints.RemoveAt(0);
+    GameObject newPattern = Instantiate(s.pattern);
+    PatternData newPatternData = newPattern.GetComponent<PatternData>();
+    Transform spawnPoint = newPatternData.waypoints[0];
+    newPatternData.waypoints.RemoveAt(0);
     GameObject ship = Instantiate(s.spawnType, spawnPoint.position, spawnPoint.rotation, Gamemaster.ships.transform);
 
     EnemyShip es = ship.GetComponent<EnemyShip>();
-    gm.LogSpawn(es.stats, pattern);
+    gm.LogSpawn(es.stats, newPatternData);
 
     EnemyPatternComponent epc = ship.AddComponent<EnemyPatternComponent>();
-    epc.patternData = s.pattern;
+    epc.patternData = newPattern;
+    Destroy(newPattern);
   }
 
   private void CleanUp()
