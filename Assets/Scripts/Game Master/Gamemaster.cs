@@ -15,6 +15,7 @@ public class Gamemaster : MonoBehaviour
   public static GameObject waves;
 
   private string logName;
+  private StreamWriter sw;
   
   enum LogDataType
   {
@@ -150,16 +151,13 @@ public class Gamemaster : MonoBehaviour
 
     logName = Application.dataPath.Substring(0, dirSlash) + string.Format("/DDA-{0}.log", dateTime);
     Debug.Log(logName);
-    File.Create(logName);
+    sw = File.CreateText(logName);
   }
 
   private void WriteOutToLog(LogEntry le)
   {
-    using (StreamWriter sw = File.AppendText(logName))
-    {
-      string output = LogDataEntryToStr(le);
-      Debug.Log(string.Format("Wrote {0} to file", output));
-      sw.WriteLine(output);
-    }
+    string output = LogDataEntryToStr(le);
+    Debug.Log(string.Format("Wrote {0} to file", output));
+    sw.WriteLine(output);
   }
 }

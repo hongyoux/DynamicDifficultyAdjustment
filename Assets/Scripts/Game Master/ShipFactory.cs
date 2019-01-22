@@ -39,6 +39,9 @@ public class ShipFactory : MonoBehaviour
 
   private List<GameObject> cleanThese;
 
+  private float cooldown;
+  private float timeBetweenWaves;
+
   // Use this for initialization
   void Start()
   {
@@ -60,28 +63,26 @@ public class ShipFactory : MonoBehaviour
     {
       patternList.Add(p.name, p.pattern);
     }
+
+    timeBetweenWaves = 10;
+
+    cooldown = Time.time + timeBetweenWaves;
   }
 
   // Update is called once per frame
   void Update()
   {
-
-    for (int i = 0; i < waves.Count; i++)
+    if (Time.time >= cooldown)
     {
-      WaveData wd = waves[i].GetComponent<WaveData>();
-      if (wd.initialTime < Time.time)
-      {
-        wd.Spawn();
-
-        cleanThese.Add(waves[i]);
-      }
+      SpawnRandomWave();
+      cooldown = Time.time + timeBetweenWaves;
     }
+  }
 
-    foreach (GameObject g in cleanThese)
-    {
-      waves.Remove(g);
-    }
-
-    cleanThese.Clear();
+  void SpawnRandomWave()
+  {
+    int index = UnityEngine.Random.Range(0, waves.Count);
+    WaveData wd = waves[index].GetComponent<WaveData>();
+    wd.Spawn();
   }
 }
