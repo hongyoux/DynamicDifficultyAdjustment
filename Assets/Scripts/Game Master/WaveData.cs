@@ -11,7 +11,6 @@ public class WaveData : MonoBehaviour
   public struct ShipData
   {
     public float spawnTime;
-    public Transform spawnPoint;
     public GameObject spawnType;
     public GameObject pattern;
   }
@@ -50,13 +49,16 @@ public class WaveData : MonoBehaviour
 
   private void SpawnShip(ShipData s)
   {
-    GameObject ship = Instantiate(s.spawnType, s.spawnPoint.position, s.spawnPoint.rotation, Gamemaster.ships.transform);
-    EnemyPatternComponent epc = ship.AddComponent<EnemyPatternComponent>();
-    epc.patternData = s.pattern;
+    PatternData pattern = s.pattern.GetComponent<PatternData>();
+    Transform spawnPoint = pattern.waypoints[0];
+    pattern.waypoints.RemoveAt(0);
+    GameObject ship = Instantiate(s.spawnType, spawnPoint.position, spawnPoint.rotation, Gamemaster.ships.transform);
 
     EnemyShip es = ship.GetComponent<EnemyShip>();
-    PatternData pattern = s.pattern.GetComponent<PatternData>();
     gm.LogSpawn(es.stats, pattern);
+
+    EnemyPatternComponent epc = ship.AddComponent<EnemyPatternComponent>();
+    epc.patternData = s.pattern;
   }
 
   private void CleanUp()
