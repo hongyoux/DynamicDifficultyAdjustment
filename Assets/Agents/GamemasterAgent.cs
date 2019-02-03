@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
 
-[RequireComponent(typeof(Gamemaster))]
 public class GamemasterAgent : Agent
 {
   private Player p;
-  private Gamemaster gm;
 
   private void Start()
   {
-    gm = GetComponent<Gamemaster>();
-    p = gm.GetPlayer();
+    p = Gamemaster.Instance.GetPlayer();
   }
 
   public override void AgentReset()
@@ -47,7 +44,7 @@ public class GamemasterAgent : Agent
     AddVectorObs(Time.time);
 
     //Get total count of each summon so far
-    AddVectorObs(gm.sf.GetSummonedWavesSoFar());
+    AddVectorObs(Gamemaster.Instance.sf.GetSummonedWavesSoFar());
 
     //Get all ship types on screen right now
 

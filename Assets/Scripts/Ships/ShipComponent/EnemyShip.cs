@@ -16,7 +16,7 @@ public class EnemyShip : Ship
   protected override void Destroy()
   {
     Logger.Instance.LogKill(stats.name);
-    gm.UpdatePlayerScore(stats.score);
+    Gamemaster.Instance.UpdatePlayerScore(stats.score);
     base.Destroy();
   }
 

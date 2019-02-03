@@ -33,12 +33,16 @@ public class WeaponComponent : MonoBehaviour
 
   protected GameObject SpawnBullet(Transform spawnPoint)
   {
-    GameObject g = Instantiate<GameObject>(bullet, Gamemaster.bullets.transform);
-    g.transform.position = spawnPoint.position;
+    if (Gamemaster.bullets != null)
+    {
+      GameObject g = Instantiate<GameObject>(bullet, Gamemaster.bullets.transform);
+      g.transform.position = spawnPoint.position;
 
-    BulletComponent b = g.GetComponent<BulletComponent>();
-    b.stats.position = spawnPoint.position;
+      BulletComponent b = g.GetComponent<BulletComponent>();
+      b.stats.position = spawnPoint.position;
 
-    return g;
+      return g;
+    }
+    return null;
   }
 }

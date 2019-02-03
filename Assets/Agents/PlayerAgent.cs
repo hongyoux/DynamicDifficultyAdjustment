@@ -5,12 +5,10 @@ using MLAgents;
 public class PlayerAgent : Agent
 {
   private Player p;
-  private Gamemaster gm;
 
   void Start()
   {
-    p = GetComponent<Player>();
-    gm = GameObject.Find("GameMaster").GetComponent<Gamemaster>();
+    p = Gamemaster.Instance.GetPlayer();
   }
 
   public override void AgentReset()
@@ -19,9 +17,9 @@ public class PlayerAgent : Agent
     p.stats.currHealth = p.stats.maxHealth;
     p.stats.lives = 1;
     p.stats.score = 0;
-    p.stats.position = gm.playerSpawnLocation.position;
-    transform.position = gm.playerSpawnLocation.position;
-    gm.Reset();
+    p.stats.position = Gamemaster.Instance.playerSpawnLocation.position;
+    transform.position = Gamemaster.Instance.playerSpawnLocation.position;
+    Gamemaster.Instance.Reset();
   }
 
   private void ObservePlayerCurrentPosition()
@@ -43,7 +41,7 @@ public class PlayerAgent : Agent
     int totalBStats = 100;
     int totalSStats = 10;
 
-    foreach (BulletComponent bs in gm.bulletsNearPlayer)
+    foreach (BulletComponent bs in Gamemaster.Instance.bulletsNearPlayer)
     {
       //Relative Dist from Player
       Vector2 distFromPlayer = p.stats.position - bs.stats.position;
@@ -58,7 +56,7 @@ public class PlayerAgent : Agent
       AddVectorObs(bs.stats.velocity);
     }
 
-    for (int i = 0; i < totalBStats - gm.bulletsNearPlayer.Count; i++)
+    for (int i = 0; i < totalBStats - Gamemaster.Instance.bulletsNearPlayer.Count; i++)
     {
       AddVectorObs(1); //Relative X
       AddVectorObs(1); //Relative Y
@@ -66,7 +64,7 @@ public class PlayerAgent : Agent
       AddVectorObs(0); //Velocity
     }
 
-    foreach (Ship ss in gm.enemiesByValue)
+    foreach (Ship ss in Gamemaster.Instance.enemiesByValue)
     {
       //Relative Dist from Player
       Vector2 distFromPlayer = p.stats.position - ss.stats.position;
@@ -79,7 +77,7 @@ public class PlayerAgent : Agent
       AddVectorObs(ss.stats.score);
     }
 
-    for (int i = 0; i < totalSStats - gm.enemiesByValue.Count; i++)
+    for (int i = 0; i < totalSStats - Gamemaster.Instance.enemiesByValue.Count; i++)
     {
       AddVectorObs(1); //Relative X
       AddVectorObs(1); //Relative Y

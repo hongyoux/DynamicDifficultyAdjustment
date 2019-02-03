@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class ChaseEnemyWeapon : WeaponComponent
 {
-  private Gamemaster gm;
-
   Vector3 targetPos;
 
   private void Start()
   {
-    GameObject g = GameObject.Find("GameMaster");
-    gm = g.GetComponent<Gamemaster>();
     targetPos = new Vector3(0, -10, 1);
   }
 
@@ -24,12 +20,15 @@ public class ChaseEnemyWeapon : WeaponComponent
     CoolingDown();
 
     GameObject b = SpawnBullet(spawnPoints[0]);
-    ChaseBulletMovement cbm = b.GetComponent<ChaseBulletMovement>();
-    Player p = gm.GetPlayer();
-    if (p != null)
+    if (b != null)
     {
-      targetPos = p.transform.position;
+      ChaseBulletMovement cbm = b.GetComponent<ChaseBulletMovement>();
+      Player p = Gamemaster.Instance.GetPlayer();
+      if (p != null)
+      {
+        targetPos = p.transform.position;
+      }
+      cbm.SetTarget(targetPos);
     }
-    cbm.SetTarget(targetPos);
   }
 }

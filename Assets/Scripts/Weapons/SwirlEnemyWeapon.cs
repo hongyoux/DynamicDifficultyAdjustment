@@ -13,9 +13,12 @@ public class SwirlEnemyWeapon : WeaponComponent
     }
     CoolingDown();
 
-    GameObject leftBullet = SpawnBullet(spawnPoints[0]);
+    SpawnBullet(spawnPoints[0]);
     GameObject rightBullet = SpawnBullet(spawnPoints[1]);
-    SwirlBulletMovement sbm = rightBullet.GetComponent<SwirlBulletMovement>();
-    sbm.width *= -1;
+    if (rightBullet != null)
+    {
+      SwirlBulletMovement sbm = rightBullet.GetComponent<SwirlBulletMovement>();
+      sbm.width *= -1;
+    }
   }
 }

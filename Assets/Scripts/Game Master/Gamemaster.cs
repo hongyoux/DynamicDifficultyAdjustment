@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Gamemaster : MonoBehaviour
 {
+  private static Gamemaster gm;
+
+  public static Gamemaster Instance;
+
   public Transform playerSpawnLocation;
   public GameObject player;
 
@@ -25,8 +29,17 @@ public class Gamemaster : MonoBehaviour
   // Use this for initialization
   void Awake()
   {
-    Logger.Instance.CreateLog();
+    // Setup singleton pattern
+    if (Instance == null)
+    {
+      Instance = this;
+    }
+    else if (Instance != this)
+    {
+      Destroy(gameObject);
+    }
 
+    Logger.Instance.CreateLog();
     uiComponent = transform.GetComponent<UIComponent>();
     sf = GetComponentInChildren<ShipFactory>();
 
@@ -74,7 +87,6 @@ public class Gamemaster : MonoBehaviour
 
     updateObservableEnemies();
     updateObservableBullets();
-
   }
 
   private void updateObservableEnemies()
@@ -98,12 +110,15 @@ public class Gamemaster : MonoBehaviour
 
   private void updateObservableBullets()
   {
-    // Sort list of Bullets for proximity to player
-    List<BulletComponent> bulletsCopy = new List<BulletComponent>(bullets.GetComponentsInChildren<EnemyBulletComponent>());
-    if (bulletsCopy.Count > 0)
+    if (bullets != null)
     {
-      bulletsCopy.Sort(SortByDistance);
-      bulletsNearPlayer = bulletsCopy.GetRange(0, Mathf.Min(bulletsCopy.Count, 100));
+      // Sort list of Bullets for proximity to player
+      List<BulletComponent> bulletsCopy = new List<BulletComponent>(bullets.GetComponentsInChildren<EnemyBulletComponent>());
+      if (bulletsCopy.Count > 0)
+      {
+        bulletsCopy.Sort(SortByDistance);
+        bulletsNearPlayer = bulletsCopy.GetRange(0, Mathf.Min(bulletsCopy.Count, 100));
+      }
     }
   }
 

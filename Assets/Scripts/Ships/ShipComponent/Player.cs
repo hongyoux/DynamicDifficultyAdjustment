@@ -26,7 +26,7 @@ public class Player : Ship
     else
     {
       GetComponent<Renderer>().enabled = false;
-      gm.Stop();
+      Gamemaster.Instance.Stop();
 
       pa.SetReward(-1f);
       pa.Done();
