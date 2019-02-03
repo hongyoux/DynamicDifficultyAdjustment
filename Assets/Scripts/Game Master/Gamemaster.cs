@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.IO;
 
 
 public class Gamemaster : MonoBehaviour
@@ -14,32 +11,21 @@ public class Gamemaster : MonoBehaviour
   public static GameObject ships;
   public static GameObject waves;
 
-  private string logName;
-  private StreamWriter sw;
+  public ShipFactory sf;
 
-  private ShipFactory sf;
-
-  enum LogDataType
-  {
-    DAMAGE, SPAWN, KILL, SCORE
-  }
-  private struct LogEntry
-  {
-    public LogDataType ldt;
-    public float timestamp;
-    public string data;
-  }
-
-  private static List<LogEntry> logs;
+  [HideInInspector]
+  public List<BulletComponent> bulletsNearPlayer;
+  [HideInInspector]
+  public List<Ship> enemiesByValue;
 
   private Player p;
+  private PlayerAgent pa;
   private UIComponent uiComponent;
   
   // Use this for initialization
-  void Start()
+  void Awake()
   {
-    CreateLogFile();
-    logs = new List<LogEntry>();
+    Logger.Instance.CreateLog();
 
     uiComponent = transform.GetComponent<UIComponent>();
     sf = GetComponentInChildren<ShipFactory>();
@@ -55,12 +41,11 @@ public class Gamemaster : MonoBehaviour
 
     GameObject pObj = Instantiate(player, playerSpawnLocation.position, playerSpawnLocation.rotation, ships.transform);
     p = pObj.GetComponent<Player>();
+    pa = p.GetComponent<PlayerAgent>();
   }
 
   public void Reset()
   {
-    Stop();
-
     bullets = new GameObject("bullets");
     bullets.transform.parent = transform;
 
@@ -86,6 +71,48 @@ public class Gamemaster : MonoBehaviour
   void Update()
   {
     uiComponent.UpdateUI(p.stats.currHealth, p.stats.lives, p.stats.score, 0.0f);
+
+    updateObservableEnemies();
+    updateObservableBullets();
+
+  }
+
+  private void updateObservableEnemies()
+  {
+    if (ships != null)
+    {
+      List<Ship> shipStatsCopy = new List<Ship>(ships.GetComponentsInChildren<EnemyShip>());
+
+      if (shipStatsCopy.Count > 0)
+      {
+        shipStatsCopy.Sort(SortByScore);
+        enemiesByValue = shipStatsCopy.GetRange(0, Mathf.Min(shipStatsCopy.Count, 10));
+      }
+    }
+  }
+
+  private int SortByScore(Ship a, Ship b)
+  {
+    return -a.stats.score.CompareTo(b.stats.score);
+  }
+
+  private void updateObservableBullets()
+  {
+    // Sort list of Bullets for proximity to player
+    List<BulletComponent> bulletsCopy = new List<BulletComponent>(bullets.GetComponentsInChildren<EnemyBulletComponent>());
+    if (bulletsCopy.Count > 0)
+    {
+      bulletsCopy.Sort(SortByDistance);
+      bulletsNearPlayer = bulletsCopy.GetRange(0, Mathf.Min(bulletsCopy.Count, 100));
+    }
+  }
+
+  private int SortByDistance(BulletComponent a, BulletComponent b)
+  {
+    int distA = (int) Vector3.Distance(new Vector3(a.stats.position.x, a.stats.position.y, 0), p.transform.position);
+    int distB = (int) Vector3.Distance(new Vector3(b.stats.position.x, b.stats.position.y, 0), p.transform.position);
+
+    return distA.CompareTo(distB);
   }
 
   public Player GetPlayer()
@@ -96,96 +123,7 @@ public class Gamemaster : MonoBehaviour
   public void UpdatePlayerScore(int score)
   {
     p.stats.score += score;
-    LogScore(p.stats.score);
-  }
-
-  private void Log(LogDataType ldt, string data)
-  {
-    LogEntry le = new LogEntry();
-    le.ldt = ldt;
-    le.timestamp = Time.time;
-    le.data = data;
-    WriteOutToLog(le);
-  }
-
-  public void LogDamage(int currHealth)
-  {
-    string data = string.Format("Current Health: {0}", currHealth);
-
-    Log(LogDataType.DAMAGE, data);
-  }
-
-  public void LogScore(int score)
-  {
-    string data = string.Format("Score: {0}", score);
-
-    Log(LogDataType.SCORE, data);
-  }
-
-  public void LogSpawn(ShipStats s, PatternData p)
-  {
-    string data = string.Format("Ship: {0}, Pattern: {1}", s.name, p.name);
-
-    Log(LogDataType.SPAWN, data);
-  }
-
-  public void LogKill(string data)
-  {
-    Log(LogDataType.KILL, data);
-  }
-
-  private static string LogDataEntryToStr(LogEntry le)
-  {
-    string type;
-
-    switch (le.ldt)
-    {
-      case LogDataType.DAMAGE:
-        {
-          type = "Damage";
-          break;
-        }
-      case LogDataType.KILL:
-        {
-          type = "Kill";
-          break;
-        }
-      case LogDataType.SCORE:
-        {
-          type = "Score";
-          break;
-        }
-      case LogDataType.SPAWN:
-        {
-          type = "Spawn";
-          break;
-        }
-      default:
-        {
-          type = "DEBUG";
-          break;
-        }
-    }
-
-    string time = le.timestamp.ToString();
-
-    return string.Format("{0} | {1} | {2}", type, time, le.data);
-  }
-
-  private void CreateLogFile()
-  {
-    string dateTime = DateTime.Now.ToString("MM-dd-yy_h-mm-ss-ff");
-    int dirSlash = Application.dataPath.LastIndexOf("/");
-
-    logName = Application.dataPath.Substring(0, dirSlash) + string.Format("/DDA-{0}.log", dateTime);
-    Debug.Log(logName);
-    sw = File.CreateText(logName);
-  }
-
-  private void WriteOutToLog(LogEntry le)
-  {
-    string output = LogDataEntryToStr(le);
-    Debug.Log(string.Format("Wrote {0} to file", output));
-    sw.WriteLine(output);
+    pa.SetReward(score * .05f);
+    Logger.Instance.LogScore(p.stats.score);
   }
 }

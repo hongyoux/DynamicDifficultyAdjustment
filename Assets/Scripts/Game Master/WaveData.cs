@@ -20,13 +20,8 @@ public class WaveData : MonoBehaviour
   public List<ShipData> waveData;
   private List<ShipData> garbage;
 
-  private Gamemaster gm;
-
   private void Awake()
   {
-    GameObject g = GameObject.Find("GameMaster");
-    gm = g.GetComponent<Gamemaster>();
-
     garbage = new List<ShipData>();
     initialTime = Time.time;
   }
@@ -63,7 +58,7 @@ public class WaveData : MonoBehaviour
     GameObject ship = Instantiate(s.spawnType, spawnPoint.position, spawnPoint.rotation, Gamemaster.ships.transform);
 
     EnemyShip es = ship.GetComponent<EnemyShip>();
-    gm.LogSpawn(es.stats, newPatternData);
+    Logger.Instance.LogSpawn(es.stats, newPatternData);
 
     EnemyPatternComponent epc = ship.AddComponent<EnemyPatternComponent>();
     epc.patternData = newPattern;

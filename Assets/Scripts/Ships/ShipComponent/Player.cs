@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class Player : Ship
 {
+  private PlayerAgent pa;
+
+  private void Start()
+  {
+    pa = GetComponent<PlayerAgent>();
+  }
+
   // Update is called once per frame
   void Update()
   {
+    pa.SetReward(.001f);
     if (stats.lives >= 1)
     {
       if (stats.currHealth <= 0)
@@ -19,12 +27,16 @@ public class Player : Ship
     {
       GetComponent<Renderer>().enabled = false;
       gm.Stop();
+
+      pa.SetReward(-1f);
+      pa.Done();
     }
   }
 
   public override void TakeDamage(int damage) 
   {
-    gm.LogDamage(stats.currHealth);
+    Logger.Instance.LogDamage(stats.currHealth);
+    pa.SetReward(-.003f * damage);
     base.TakeDamage(damage);
   }
 }

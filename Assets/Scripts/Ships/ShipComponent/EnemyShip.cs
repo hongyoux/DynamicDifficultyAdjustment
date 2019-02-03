@@ -15,8 +15,18 @@ public class EnemyShip : Ship
 
   protected override void Destroy()
   {
-    gm.LogKill(stats.name);
+    Logger.Instance.LogKill(stats.name);
     gm.UpdatePlayerScore(stats.score);
     base.Destroy();
+  }
+
+  private void OnTriggerEnter2D(Collider2D collision)
+  {
+    if (collision.tag == "PlayerShip")
+    {
+      GameObject player = collision.gameObject;
+      Ship playerShip = player.GetComponent<Ship>();
+      playerShip.TakeDamage(2);
+    }
   }
 }

@@ -178,7 +178,7 @@ MonoBehaviour:
     lives: 0
     position: {x: 0, y: 0}
     movespeed: 3
-    score: 120
+    score: 10
     powerLevel: 0
   spawnPoint: {fileID: 443633323}
   weapon: {fileID: 6296506458196654696, guid: 3e9e7eee4f0e5a342813d6684529140e, type: 3}

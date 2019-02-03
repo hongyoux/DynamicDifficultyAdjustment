@@ -42,10 +42,10 @@ GameObject:
   - component: {fileID: 33532554265987730}
   - component: {fileID: 23845557359005458}
   - component: {fileID: 114246079263200538}
-  - component: {fileID: 114937368782307276}
   - component: {fileID: 114507767272855674}
   - component: {fileID: 61109462346730388}
   - component: {fileID: 50222035430432818}
+  - component: {fileID: 3450440180497418894}
   m_Layer: 0
   m_Name: Player
   m_TagString: PlayerShip
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     currHealth: 0
+    name: Player
     maxHealth: 100
     lives: 1
     position: {x: 0, y: 0}
@@ -135,18 +136,6 @@ MonoBehaviour:
     powerLevel: 1
   spawnPoint: {fileID: 4086855289357870}
   weapon: {fileID: 1354308263494022, guid: 63e9fcc8f1e62314fa09f79d5649bd4d, type: 3}
---- !u!114 &114937368782307276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964102092428444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68bb8b8c68dfb904388bea6a1181fce6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114507767272855674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,3 +195,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3450440180497418894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964102092428444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f745ee4d7eda284689bb1320b38de22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brain: {fileID: 11400000, guid: a0d8496e30d1b15409b744798a7394a1, type: 2}
+  agentParameters:
+    agentCameras: []
+    maxStep: 0
+    resetOnDone: 1
+    onDemandDecision: 0
+    numberOfActionsBetweenDecisions: 10

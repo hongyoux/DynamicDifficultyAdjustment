@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class ShipFactory : MonoBehaviour
 {
+  public List<GameObject> ships;
+
   public List<GameObject> waves;
-  private List<GameObject> cleanThese;
+
+  private float[] waveCount;
 
   private float cooldown;
   private float timeBetweenWaves;
@@ -16,11 +19,11 @@ public class ShipFactory : MonoBehaviour
   // Use this for initialization
   void Start()
   {
-    cleanThese = new List<GameObject>();
-
     timeBetweenWaves = 5;
 
     cooldown = Time.time + timeBetweenWaves;
+
+    waveCount = new float[waves.Count];
   }
 
   // Update is called once per frame
@@ -51,9 +54,14 @@ public class ShipFactory : MonoBehaviour
   void SpawnRandomWave()
   {
     int index = UnityEngine.Random.Range(0, waves.Count);
-    Debug.Log(index);
+    waveCount[index]++;
     GameObject newWave = Instantiate(waves[index], Gamemaster.waves.transform);
     WaveData wd = newWave.GetComponent<WaveData>();
     wd.SpawnWave();
+  }
+
+  public float[] GetSummonedWavesSoFar()
+  {
+    return waveCount;
   }
 }

@@ -11,7 +11,7 @@ public class Ship : MonoBehaviour
   protected Gamemaster gm;
 
   // Use this for initialization
-  void Start()
+  void Awake()
   {
     stats.position = transform.position;
     GameObject g = GameObject.Find("GameMaster");

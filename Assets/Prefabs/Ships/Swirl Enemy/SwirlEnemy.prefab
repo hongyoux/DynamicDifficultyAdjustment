@@ -134,11 +134,11 @@ MonoBehaviour:
   stats:
     currHealth: 0
     name: SwirlEnemy
-    maxHealth: 30
+    maxHealth: 20
     lives: 0
     position: {x: 0, y: 0}
     movespeed: 1
-    score: 250
+    score: 40
     powerLevel: 0
   spawnPoint: {fileID: 1134221210250204441}
   weapon: {fileID: 320835002987321852, guid: 3fb07f80290e8f641bb9981efb2ba743, type: 3}

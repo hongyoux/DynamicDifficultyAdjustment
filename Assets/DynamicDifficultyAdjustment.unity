@@ -156,14 +156,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   broadcastHub:
-    broadcastingBrains: []
+    broadcastingBrains:
+    - {fileID: 11400000, guid: a0d8496e30d1b15409b744798a7394a1, type: 2}
+    - {fileID: 11400000, guid: 2e1039d87a7395d47abd15843c6481c4, type: 2}
     _brainsToControl: []
   maxSteps: 0
   trainingConfiguration:
     width: 80
     height: 80
     qualityLevel: 1
-    timeScale: 100
+    timeScale: 7
     targetFrameRate: -1
   inferenceConfiguration:
     width: 1280
@@ -406,5 +408,15 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 324600173}
+    - target: {fileID: 3366723923440521222, guid: 883c16db99981e945ad11450169c8adf,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3366723923440521222, guid: 883c16db99981e945ad11450169c8adf,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -11.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 883c16db99981e945ad11450169c8adf, type: 3}

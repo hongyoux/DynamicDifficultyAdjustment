@@ -141,10 +141,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    damage: 2
+    damage: 1
     direction: {x: 0, y: 0}
     position: {x: 0, y: 0}
-    velocity: 5
+    velocity: 3
     acceleration: 2
 --- !u!114 &1873960985137195140
 MonoBehaviour:
