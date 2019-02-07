@@ -60,6 +60,8 @@ public class WaveData : MonoBehaviour
     EnemyShip es = ship.GetComponent<EnemyShip>();
     Logger.Instance.LogSpawn(es.stats, newPatternData);
 
+    Gamemaster.Instance.totalPossiblePoints += es.stats.score; // Even if ship doesn't break, total score goes up
+
     EnemyPatternComponent epc = ship.AddComponent<EnemyPatternComponent>();
     epc.patternData = newPattern;
     Destroy(newPattern);

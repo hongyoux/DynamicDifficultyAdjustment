@@ -15,10 +15,21 @@ public class Gamemaster : MonoBehaviour
   public static GameObject ships;
   public static GameObject waves;
 
+  [HideInInspector]
   public ShipFactory sf;
 
   [HideInInspector]
+  public int totalPossiblePoints;
+
+  [HideInInspector]
+  public int[] damageDealtByBullets;
+
+  [HideInInspector]
+  public int targetTime = 300; //Seconds (5 minute gameplay session)
+
+  [HideInInspector]
   public List<BulletComponent> bulletsNearPlayer;
+
   [HideInInspector]
   public List<Ship> enemiesByValue;
 
@@ -28,6 +39,14 @@ public class Gamemaster : MonoBehaviour
   
   // Use this for initialization
   void Awake()
+  {
+    InitOnce();
+    Reset();
+
+    SpawnPlayer();
+  }
+
+  void InitOnce()
   {
     // Setup singleton pattern
     if (Instance == null)
@@ -42,16 +61,10 @@ public class Gamemaster : MonoBehaviour
     Logger.Instance.CreateLog();
     uiComponent = transform.GetComponent<UIComponent>();
     sf = GetComponentInChildren<ShipFactory>();
+  }
 
-    bullets = new GameObject("bullets");
-    bullets.transform.parent = transform;
-
-    ships = new GameObject("ships");
-    ships.transform.parent = transform;
-
-    waves = new GameObject("waves");
-    waves.transform.parent = transform;
-
+  private void SpawnPlayer()
+  {
     GameObject pObj = Instantiate(player, playerSpawnLocation.position, playerSpawnLocation.rotation, ships.transform);
     p = pObj.GetComponent<Player>();
     pa = p.GetComponent<PlayerAgent>();
@@ -68,11 +81,17 @@ public class Gamemaster : MonoBehaviour
     waves = new GameObject("waves");
     waves.transform.parent = transform;
 
+    totalPossiblePoints = 0;
+    damageDealtByBullets = new int[3]; // Reset to empty array of damage dealt
+
     sf.Reset();
   }
 
   public void Stop()
   {
+    GamemasterAgent gma = GetComponent<GamemasterAgent>();
+    gma.Done();
+
     Destroy(bullets);
     Destroy(ships);
     Destroy(waves);
@@ -98,7 +117,7 @@ public class Gamemaster : MonoBehaviour
       if (shipStatsCopy.Count > 0)
       {
         shipStatsCopy.Sort(SortByScore);
-        enemiesByValue = shipStatsCopy.GetRange(0, Mathf.Min(shipStatsCopy.Count, 10));
+        enemiesByValue = shipStatsCopy.GetRange(0, Mathf.Min(shipStatsCopy.Count, 5));
       }
     }
   }
@@ -117,7 +136,7 @@ public class Gamemaster : MonoBehaviour
       if (bulletsCopy.Count > 0)
       {
         bulletsCopy.Sort(SortByDistance);
-        bulletsNearPlayer = bulletsCopy.GetRange(0, Mathf.Min(bulletsCopy.Count, 100));
+        bulletsNearPlayer = bulletsCopy.GetRange(0, Mathf.Min(bulletsCopy.Count, 10));
       }
     }
   }
@@ -140,5 +159,36 @@ public class Gamemaster : MonoBehaviour
     p.stats.score += score;
     pa.SetReward(score * .05f);
     Logger.Instance.LogScore(p.stats.score);
+  }
+
+  public int[] GetCountOfAllShips()
+  {
+    /**
+     * Basic ship = 0
+     * Chase ship = 1
+     * Swirl ship = 2
+     */
+    int[] shipsCount = new int[3];
+
+    if (ships != null)
+    {
+      List<EnemyShip> shipStatsCopy = new List<EnemyShip>(ships.GetComponentsInChildren<EnemyShip>());
+      foreach(EnemyShip s in shipStatsCopy)
+      {
+        switch(s.type) {
+          case ShipType.BASIC:
+            shipsCount[0]++;
+            break;
+          case ShipType.CHASE:
+            shipsCount[1]++;
+            break;
+          case ShipType.SWIRL:
+            shipsCount[2]++;
+            break;
+        }
+      }
+    }
+
+    return shipsCount;
   }
 }

@@ -9,7 +9,7 @@ public class ShipFactory : MonoBehaviour
 
   public List<GameObject> waves;
 
-  private float[] waveCount;
+  private int[] waveCount;
 
   private float cooldown;
   private float timeBetweenWaves;
@@ -19,11 +19,10 @@ public class ShipFactory : MonoBehaviour
   // Use this for initialization
   void Start()
   {
+    stopped = true;
     timeBetweenWaves = 5;
-
     cooldown = Time.time + timeBetweenWaves;
-
-    waveCount = new float[waves.Count];
+    waveCount = new int[waves.Count];
   }
 
   // Update is called once per frame
@@ -35,7 +34,8 @@ public class ShipFactory : MonoBehaviour
     }
     if (Time.time >= cooldown)
     {
-      SpawnRandomWave();
+      // Really should be agent action.
+      Gamemaster.Instance.GetComponent<GamemasterAgent>().RequestDecision();
       cooldown = Time.time + timeBetweenWaves;
     }
   }
@@ -54,14 +54,19 @@ public class ShipFactory : MonoBehaviour
   void SpawnRandomWave()
   {
     int index = UnityEngine.Random.Range(0, waves.Count);
+    SpawnWave(index);
+  }
+
+  public int[] GetSummonedWavesSoFar()
+  {
+    return waveCount;
+  }
+
+  public void SpawnWave(int index)
+  {
     waveCount[index]++;
     GameObject newWave = Instantiate(waves[index], Gamemaster.waves.transform);
     WaveData wd = newWave.GetComponent<WaveData>();
     wd.SpawnWave();
-  }
-
-  public float[] GetSummonedWavesSoFar()
-  {
-    return waveCount;
   }
 }

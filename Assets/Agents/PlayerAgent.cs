@@ -38,8 +38,8 @@ public class PlayerAgent : Agent
   {
     ObservePlayerCurrentPosition();
 
-    int totalBStats = 100;
-    int totalSStats = 10;
+    int totalBStats = 10;
+    int totalSStats = 5;
 
     foreach (BulletComponent bs in Gamemaster.Instance.bulletsNearPlayer)
     {
@@ -47,13 +47,14 @@ public class PlayerAgent : Agent
       Vector2 distFromPlayer = p.stats.position - bs.stats.position;
 
       //Relative X to Player
-      AddVectorObs(distFromPlayer.x / 10f);
+      AddVectorObs(CalcRelativePos(distFromPlayer.x, -5f, 5f));
       //Relative Y to Player
-      AddVectorObs(distFromPlayer.y / 20f);
-      //Direction of Bullet
+      AddVectorObs(CalcRelativePos(distFromPlayer.y, -10f, 10f));
+
+      //Direction of Bullet (normalized vector)
       AddVectorObs(bs.stats.direction);
-      //Speed of Bullet
-      AddVectorObs(bs.stats.velocity);
+      //Speed of Bullet (Percentage of player's max speed)
+      AddVectorObs(bs.stats.velocity / p.stats.movespeed);
     }
 
     for (int i = 0; i < totalBStats - Gamemaster.Instance.bulletsNearPlayer.Count; i++)
@@ -68,13 +69,13 @@ public class PlayerAgent : Agent
     {
       //Relative Dist from Player
       Vector2 distFromPlayer = p.stats.position - ss.stats.position;
-
+      
       //Relative X to Player
-      AddVectorObs(distFromPlayer.x / 10f);
-      //Relative X to Player
-      AddVectorObs(distFromPlayer.y / 20f);
+      AddVectorObs(CalcRelativePos(distFromPlayer.x, -5f, 5f));
+      //Relative Y to Player
+      AddVectorObs(CalcRelativePos(distFromPlayer.y, -10f, 10f));
       //Score of Ship
-      AddVectorObs(ss.stats.score);
+      AddVectorObs(ss.stats.score / 40); //Score is score of ship divided by maximum enemy ship score
     }
 
     for (int i = 0; i < totalSStats - Gamemaster.Instance.enemiesByValue.Count; i++)
@@ -128,6 +129,16 @@ public class PlayerAgent : Agent
 
     newPos.x = Mathf.Clamp(newPos.x, -boundX, boundX);
     newPos.y = Mathf.Clamp(newPos.y, -boundY, boundY);
+
+    // Avoid the top if possible
+    if (newPos.y > 0)
+    {
+      SetReward(-.1f * newPos.y);
+    }
+
+    // Avoid the outer edges
+    float xDeviation = Mathf.Abs(CalcRelativePos(newPos.x, -5f, 5f));
+    SetReward(-.001f * xDeviation);
 
     p.stats.position = newPos;
     transform.position = newPos;

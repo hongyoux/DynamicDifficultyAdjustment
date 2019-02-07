@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemyShip : Ship
 {
+  public float timeBetweenSpawns;
+
+  public ShipType type;
+
   // Update is called once per frame
   void Update()
   {

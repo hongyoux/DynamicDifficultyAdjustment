@@ -12,6 +12,31 @@ public class EnemyBulletComponent : BulletComponent
       Ship playerShip = player.GetComponent<Ship>();
       playerShip.TakeDamage(stats.damage);
 
+      int index = -1;
+      switch(stats.type)
+      {
+        case ShipType.BASIC:
+          index = 0;
+          break;
+        case ShipType.CHASE:
+          index = 1;
+          break;
+        case ShipType.SWIRL:
+          index = 2;
+          break;
+      }
+
+      if (index == -1)
+      {
+        // Didn't identify bullet, wut
+        Debug.Log("DIDNT FIND THE BULLET TYPE?!");
+      }
+      else
+      {
+        Gamemaster.Instance.damageDealtByBullets[index]++;
+      }
+
+
       Destroy(gameObject);
     }
   }

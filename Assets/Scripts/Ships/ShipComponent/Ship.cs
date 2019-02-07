@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ShipType
+{
+  PLAYER, BASIC, CHASE, SWIRL, NONE
+}
+
 public class Ship : MonoBehaviour
 {
   public ShipStats stats;

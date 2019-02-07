@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: DDAPlayerLearningBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 532
+    vectorObservationSize: 67
     numStackedVectorObservations: 1
     vectorActionSize: 05000000
     cameraResolutions: []
     vectorActionDescriptions:
     - 
     vectorActionSpaceType: 0
-  model: {fileID: 4900000, guid: 520c859d6310b1846a6bd72fcb168b63, type: 3}
+  model: {fileID: 4900000, guid: 868c42002e6864f4b978a980510de4ca, type: 3}
