@@ -23,7 +23,7 @@ public class EnemyShip : Ship
     Gamemaster.Instance.UpdatePlayerScore(stats.score);
 
     //Spawn a powerup here.
-    
+    SpawnScorePickup();
 
     base.Destroy();
   }
@@ -36,5 +36,12 @@ public class EnemyShip : Ship
       Ship playerShip = player.GetComponent<Ship>();
       playerShip.TakeDamage(2);
     }
+  }
+
+  protected void SpawnScorePickup()
+  {
+    GameObject pickup = Instantiate(Gamemaster.Instance.scorePickup, transform.position, transform.rotation, Gamemaster.bullets.transform);
+    ScorePickupMovement spm = pickup.GetComponent<ScorePickupMovement>();
+    spm.stats.position = transform.position;
   }
 }

@@ -2692,6 +2692,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpawnLocation: {fileID: 6923693459118108374}
   player: {fileID: 1964102092428444, guid: 7d18a72e23961434888798fd72ded9c8, type: 3}
+  scorePickup: {fileID: 474323629461356275, guid: 90cb29881ebf2ee4b8b55587c1490a2a,
+    type: 3}
   timeStart: 0
   sf: {fileID: 6923693459000389896}
   totalPossiblePoints: 0

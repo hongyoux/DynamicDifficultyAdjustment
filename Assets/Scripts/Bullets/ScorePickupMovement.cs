@@ -31,9 +31,8 @@ public class ScorePickupMovement : BulletComponent
 
   void CheckOutOfBounds()
   {
-    //Increasing X boundaries on bullets to be more generous around edges
-    if (transform.position.x < -10 || transform.position.x > 10 ||
-        transform.position.y < -10 || transform.position.y > 10)
+    // Only destroy object if it falls beyond pickup range
+    if (transform.position.y < -10)
     {
       Destroy(gameObject);
     }

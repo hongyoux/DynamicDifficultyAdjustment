@@ -10,6 +10,7 @@ public class Gamemaster : MonoBehaviour
 
   public Transform playerSpawnLocation;
   public GameObject player;
+  public GameObject scorePickup;
 
   public static GameObject bullets;
   public static GameObject ships;
