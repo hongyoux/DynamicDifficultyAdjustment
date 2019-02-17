@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    type: 2
+    type: 3
     damage: 1
     direction: {x: 0, y: 0}
     position: {x: 0, y: 0}

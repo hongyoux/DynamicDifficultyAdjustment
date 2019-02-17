@@ -6,19 +6,24 @@ using UnityEngine;
 public class BaseBulletMovement : MonoBehaviour
 {
   BulletComponent b;
+  float currVelocity;
+
   private void Start()
   {
     b = GetComponent<BulletComponent>();
+    currVelocity = b.stats.velocity;
   }
   // Update is called once per frame
   void Update()
   {
     Vector2 newPos = b.stats.position;
-    Vector2 change = b.stats.direction * (b.stats.velocity * Time.deltaTime);
+    Vector2 change = b.stats.direction * (currVelocity * Time.deltaTime);
 
     newPos += change;
     b.stats.position = newPos;
     transform.position = newPos;
+
+    currVelocity += (b.stats.acceleration * Time.deltaTime);
 
     CheckOutOfBounds();
   }

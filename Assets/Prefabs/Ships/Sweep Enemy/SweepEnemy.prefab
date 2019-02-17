@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4056544506318089934
+--- !u!1 &666871281822841418
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6344008458525118351}
-  - component: {fileID: 6572268770175755926}
-  - component: {fileID: 984439521932837450}
-  - component: {fileID: 895460200254399460}
-  - component: {fileID: 4183664854286423516}
-  - component: {fileID: 2464092134044613034}
-  - component: {fileID: 2423770333423278586}
+  - component: {fileID: 668879098443958412}
+  - component: {fileID: 666302100049424872}
+  - component: {fileID: 653959688220771432}
+  - component: {fileID: 687055094884962522}
+  - component: {fileID: 717107079425234174}
+  - component: {fileID: 635042758009111774}
+  - component: {fileID: 639493822430854520}
   m_Layer: 0
-  m_Name: SwirlEnemy
+  m_Name: SweepEnemy
   m_TagString: EnemyShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6344008458525118351
+--- !u!4 &668879098443958412
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4056544506318089934}
+  m_GameObject: {fileID: 666871281822841418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1134221210250204441}
+  - {fileID: 669063833165230324}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6572268770175755926
+--- !u!33 &666302100049424872
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4056544506318089934}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &984439521932837450
+  m_GameObject: {fileID: 666871281822841418}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &653959688220771432
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4056544506318089934}
+  m_GameObject: {fileID: 666871281822841418}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -59,10 +59,10 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc4a835aa96d38f4e8cfd061cf5084ff, type: 2}
+  - {fileID: 2100000, guid: 57f25c827c371ce479a1cd367aacd9c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,13 +82,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!70 &895460200254399460
-CapsuleCollider2D:
+--- !u!58 &687055094884962522
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4056544506318089934}
+  m_GameObject: {fileID: 666871281822841418}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -96,16 +96,16 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
-  m_Direction: 0
---- !u!50 &4183664854286423516
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!50 &717107079425234174
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4056544506318089934}
+  m_GameObject: {fileID: 666871281822841418}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -113,19 +113,19 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2464092134044613034
+--- !u!114 &635042758009111774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4056544506318089934}
+  m_GameObject: {fileID: 666871281822841418}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0a2ca47e3870224daae922eec4fd7b8, type: 3}
@@ -133,30 +133,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     currHealth: 0
-    name: SwirlEnemy
-    maxHealth: 20
+    name: SweepEnemy
+    maxHealth: 6
     lives: 0
     position: {x: 0, y: 0}
-    movespeed: 1
-    score: 40
+    movespeed: 3
+    score: 5
     powerLevel: 0
-  spawnPoint: {fileID: 1134221210250204441}
-  weapon: {fileID: 320835002987321852, guid: 3fb07f80290e8f641bb9981efb2ba743, type: 3}
-  timeBetweenSpawns: 1
-  type: 4
---- !u!114 &2423770333423278586
+  spawnPoint: {fileID: 669063833165230324}
+  weapon: {fileID: 6056985926301157248, guid: 130349abc070ff3418b7a21e844692a7, type: 3}
+  timeBetweenSpawns: 0.4
+  type: 5
+--- !u!114 &639493822430854520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4056544506318089934}
+  m_GameObject: {fileID: 666871281822841418}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1c97346a6609fb49926934a0dbd036e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &5441611476767362949
+--- !u!1 &666877944562525462
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1134221210250204441}
+  - component: {fileID: 669063833165230324}
   m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Untagged
@@ -172,17 +172,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1134221210250204441
+--- !u!4 &669063833165230324
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5441611476767362949}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 666877944562525462}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6344008458525118351}
+  m_Father: {fileID: 668879098443958412}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

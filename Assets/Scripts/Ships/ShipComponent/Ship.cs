@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum ShipType
 {
-  PLAYER, BASIC, CHASE, SWIRL, NONE
+    NONE, PLAYER, BASIC, CHASE, SWIRL, SWEEP, POINT
 }
 
 public class Ship : MonoBehaviour

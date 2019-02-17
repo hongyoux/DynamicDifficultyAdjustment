@@ -183,6 +183,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 443633323}
   weapon: {fileID: 6296506458196654696, guid: 3e9e7eee4f0e5a342813d6684529140e, type: 3}
   timeBetweenSpawns: 0.5
+  type: 3
 --- !u!114 &1845458380768228731
 MonoBehaviour:
   m_ObjectHideFlags: 0
