@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aabe0b091dc1c6479e022b226624584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 1
+  cooldown: 0.75
   bullet: {fileID: 3982763822424022566, guid: 8c5a8cd3a833d4441998ec47e6f0fcc0, type: 3}
   spawnPoints:
   - {fileID: 6060353369628478792}
