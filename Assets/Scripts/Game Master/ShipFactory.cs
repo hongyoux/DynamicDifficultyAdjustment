@@ -64,6 +64,8 @@ public class ShipFactory : MonoBehaviour
 
   public void SpawnWave(int index)
   {
+    Gamemaster.Instance.SpawnWaveReward(index);
+
     waveCount[index]++;
     GameObject newWave = Instantiate(waves[index], Gamemaster.waves.transform);
     WaveData wd = newWave.GetComponent<WaveData>();

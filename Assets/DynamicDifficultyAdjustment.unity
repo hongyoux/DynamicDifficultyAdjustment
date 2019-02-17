@@ -181,20 +181,19 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d, type: 2}
     _brainsToControl:
     - {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d, type: 2}
-    - {fileID: 11400000, guid: a0d8496e30d1b15409b744798a7394a1, type: 2}
   maxSteps: 0
   trainingConfiguration:
     width: 80
     height: 80
-    qualityLevel: 1
+    qualityLevel: 5
     timeScale: 1
-    targetFrameRate: 60
+    targetFrameRate: 144
   inferenceConfiguration:
     width: 1280
     height: 720
     qualityLevel: 5
     timeScale: 1
-    targetFrameRate: 60
+    targetFrameRate: 144
   resetParameters:
     resetParameters: []
 --- !u!1 &324600170

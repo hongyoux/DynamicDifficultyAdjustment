@@ -16,6 +16,9 @@ public class Gamemaster : MonoBehaviour
   public static GameObject waves;
 
   [HideInInspector]
+  public float timeStart;
+
+  [HideInInspector]
   public ShipFactory sf;
 
   [HideInInspector]
@@ -35,8 +38,9 @@ public class Gamemaster : MonoBehaviour
 
   private Player p;
   private PlayerAgent pa;
+  private GamemasterAgent gma;
   private UIComponent uiComponent;
-  
+
   // Use this for initialization
   void Awake()
   {
@@ -61,6 +65,7 @@ public class Gamemaster : MonoBehaviour
     Logger.Instance.CreateLog();
     uiComponent = transform.GetComponent<UIComponent>();
     sf = GetComponentInChildren<ShipFactory>();
+    gma = GetComponent<GamemasterAgent>();
   }
 
   private void SpawnPlayer()
@@ -83,13 +88,13 @@ public class Gamemaster : MonoBehaviour
 
     totalPossiblePoints = 0;
     damageDealtByBullets = new int[3]; // Reset to empty array of damage dealt
+    timeStart = Time.time;
 
     sf.Reset();
   }
 
   public void Stop()
   {
-    GamemasterAgent gma = GetComponent<GamemasterAgent>();
     gma.Done();
 
     Destroy(bullets);
@@ -143,8 +148,8 @@ public class Gamemaster : MonoBehaviour
 
   private int SortByDistance(BulletComponent a, BulletComponent b)
   {
-    int distA = (int) Vector3.Distance(new Vector3(a.stats.position.x, a.stats.position.y, 0), p.transform.position);
-    int distB = (int) Vector3.Distance(new Vector3(b.stats.position.x, b.stats.position.y, 0), p.transform.position);
+    int distA = (int)Vector3.Distance(new Vector3(a.stats.position.x, a.stats.position.y, 0), p.transform.position);
+    int distB = (int)Vector3.Distance(new Vector3(b.stats.position.x, b.stats.position.y, 0), p.transform.position);
 
     return distA.CompareTo(distB);
   }
@@ -173,9 +178,10 @@ public class Gamemaster : MonoBehaviour
     if (ships != null)
     {
       List<EnemyShip> shipStatsCopy = new List<EnemyShip>(ships.GetComponentsInChildren<EnemyShip>());
-      foreach(EnemyShip s in shipStatsCopy)
+      foreach (EnemyShip s in shipStatsCopy)
       {
-        switch(s.type) {
+        switch (s.type)
+        {
           case ShipType.BASIC:
             shipsCount[0]++;
             break;
@@ -190,5 +196,32 @@ public class Gamemaster : MonoBehaviour
     }
 
     return shipsCount;
+  }
+
+  public void PlayerHitReward()
+  {
+    float scorePercentage = p.stats.score / totalPossiblePoints;
+    float timePercentage = (Time.time - timeStart) / targetTime;
+
+    gma.SetReward(scorePercentage * 2); // Someone doing well gives more reward to hit more
+    gma.SetReward(timePercentage); // Over time, bullets should hit more often.
+  }
+
+  public void SpawnWaveReward(int index)
+  {
+    int[] waveCount = sf.GetSummonedWavesSoFar();
+    int totalWaves = 0;
+    float percentOfWave = 0;
+    foreach (int i in waveCount)
+    {
+      totalWaves += i;
+    }
+
+    if (totalWaves > 0)
+    {
+      percentOfWave = waveCount[index] / totalWaves;
+    }
+
+    gma.SetReward((1 - percentOfWave) * 3); // Between 0 and 3. Rewarded more for spawning low percentage waves. 120 waves in 10 minutes, on average 1.5* 120 = ~180 points.
   }
 }

@@ -36,6 +36,7 @@ public class EnemyBulletComponent : BulletComponent
         Gamemaster.Instance.damageDealtByBullets[index]++;
       }
 
+      Gamemaster.Instance.PlayerHitReward();
 
       Destroy(gameObject);
     }
