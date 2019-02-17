@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BulletComponent))]
-public class ChaseBulletMovement : MonoBehaviour
+public class ChaseBulletMovement : EnemyBulletComponent
 {
-  BulletComponent b;
   bool stopped;
 
   private void Awake()
   {
-    b = GetComponent<BulletComponent>();
     stopped = true;
   }
 
@@ -22,11 +19,11 @@ public class ChaseBulletMovement : MonoBehaviour
       return;
     }
     Vector3 currentPos = transform.position;
-    float acceleratedAmount = b.stats.acceleration * Time.deltaTime;
-    Vector3 change = b.stats.direction * ((b.stats.velocity + b.stats.acceleration) * Time.deltaTime);
+    float acceleratedAmount = stats.acceleration * Time.deltaTime;
+    Vector3 change = stats.direction * (stats.velocity * Time.deltaTime);
     currentPos += change;
 
-    b.stats.position = currentPos;
+    stats.position = currentPos;
     transform.position = currentPos;
 
     CheckOutOfBounds();
@@ -35,7 +32,7 @@ public class ChaseBulletMovement : MonoBehaviour
   public void SetTarget(Vector3 pos)
   {
     Vector2 direction = pos - transform.position;
-    b.stats.direction = direction.normalized;
+    stats.direction = direction.normalized;
     stopped = false;
   }
 

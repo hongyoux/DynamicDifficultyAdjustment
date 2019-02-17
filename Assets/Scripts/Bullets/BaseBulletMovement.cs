@@ -2,28 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BulletComponent))]
-public class BaseBulletMovement : MonoBehaviour
+public class BaseBulletMovement : EnemyBulletComponent
 {
-  BulletComponent b;
   float currVelocity;
 
   private void Start()
   {
-    b = GetComponent<BulletComponent>();
-    currVelocity = b.stats.velocity;
+    currVelocity = stats.velocity;
   }
   // Update is called once per frame
   void Update()
   {
-    Vector2 newPos = b.stats.position;
-    Vector2 change = b.stats.direction * (currVelocity * Time.deltaTime);
+    Vector2 newPos = stats.position;
+    Vector2 change = stats.direction * (currVelocity * Time.deltaTime);
 
     newPos += change;
-    b.stats.position = newPos;
+    stats.position = newPos;
     transform.position = newPos;
 
-    currVelocity += (b.stats.acceleration * Time.deltaTime);
+    currVelocity += (stats.acceleration * Time.deltaTime);
 
     CheckOutOfBounds();
   }

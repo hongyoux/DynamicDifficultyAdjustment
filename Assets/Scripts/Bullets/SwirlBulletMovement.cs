@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BulletComponent))]
-public class SwirlBulletMovement : MonoBehaviour
+public class SwirlBulletMovement : EnemyBulletComponent
 {
   public float freq;
   public float width;
 
   float additionalX;
-  BulletComponent b;
 
   float currTime;
 
   private void Start()
   {
-    b = GetComponent<BulletComponent>();
-
     additionalX = 0f;
     currTime = 0f;
   }
@@ -24,12 +20,12 @@ public class SwirlBulletMovement : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    Vector3 newPos = b.stats.position;
-    Vector3 change = b.stats.direction * (b.stats.velocity * Time.deltaTime);
+    Vector3 newPos = stats.position;
+    Vector3 change = stats.direction * (stats.velocity * Time.deltaTime);
     additionalX = width * Mathf.Sin(currTime * freq);
 
     newPos += change;
-    b.stats.position = newPos;
+    stats.position = newPos;
 
     newPos.x += additionalX;
     transform.position = newPos;

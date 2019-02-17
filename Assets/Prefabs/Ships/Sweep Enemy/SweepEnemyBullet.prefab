@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3969290282216426664}
   - component: {fileID: 4031545450683220984}
   - component: {fileID: 4003426851351331970}
-  - component: {fileID: 3952447423674529714}
   - component: {fileID: 3951571409475843788}
   m_Layer: 0
   m_Name: SweepEnemyBullet
@@ -118,25 +117,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &3952447423674529714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3982763822424022566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 704f39d4a9630244791eb580d93ed4e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats:
-    type: 5
-    damage: 1
-    direction: {x: 0, y: -1}
-    position: {x: 0, y: 0}
-    velocity: 2
-    acceleration: 0.5
 --- !u!114 &3951571409475843788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,3 +129,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2ef3013808fed4386e015f84f9cdef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats:
+    type: 5
+    damage: 1
+    direction: {x: 0, y: -1}
+    position: {x: 0, y: 0}
+    velocity: 2
+    acceleration: 0.5

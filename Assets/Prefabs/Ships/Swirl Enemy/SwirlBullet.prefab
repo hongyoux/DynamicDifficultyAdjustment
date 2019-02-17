@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8185551228686513327}
   - component: {fileID: 7798736976146588950}
   - component: {fileID: 9119509954475219846}
-  - component: {fileID: 2497738965721004176}
   m_Layer: 0
   m_Name: SwirlBullet
   m_TagString: EnemyBullet
@@ -130,20 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3addff8f2674894593e33be0387a234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freq: 4
-  width: 2
---- !u!114 &2497738965721004176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7931394771830807312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 704f39d4a9630244791eb580d93ed4e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   stats:
     type: 4
     damage: 2
@@ -151,3 +136,5 @@ MonoBehaviour:
     position: {x: 0, y: 0}
     velocity: 4
     acceleration: 0
+  freq: 4
+  width: 2

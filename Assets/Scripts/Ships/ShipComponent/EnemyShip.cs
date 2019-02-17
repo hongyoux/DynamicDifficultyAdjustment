@@ -21,6 +21,10 @@ public class EnemyShip : Ship
   {
     Logger.Instance.LogKill(stats.name);
     Gamemaster.Instance.UpdatePlayerScore(stats.score);
+
+    //Spawn a powerup here.
+    
+
     base.Destroy();
   }
 

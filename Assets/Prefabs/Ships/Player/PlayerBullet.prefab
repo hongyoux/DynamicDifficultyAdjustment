@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 23772293902166022}
   - component: {fileID: 50557547979951846}
   - component: {fileID: 61740579413866878}
-  - component: {fileID: 114605818621203684}
-  - component: {fileID: 114275709921586498}
+  - component: {fileID: 2880499321791964604}
   m_Layer: 0
   m_Name: PlayerBullet
   m_TagString: PlayerBullet
@@ -128,19 +127,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114605818621203684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1548051356718886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c2ef3013808fed4386e015f84f9cdef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114275709921586498
+--- !u!114 &2880499321791964604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,8 +140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
+    type: 1
     damage: 1
     direction: {x: 0, y: 1}
     position: {x: 0, y: 0}
-    velocity: 15
+    velocity: 10
     acceleration: 0
