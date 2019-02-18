@@ -113,7 +113,6 @@ public class Logger : MonoBehaviour
   private void WriteOutToLog(LogEntry le)
   {
     string output = LogDataEntryToStr(le);
-    Debug.Log(string.Format("Wrote {0} to file", output));
     sw.WriteLine(output);
   }
 }

@@ -38,8 +38,9 @@ public class PlayerAgent : Agent
   {
     ObservePlayerCurrentPosition();
 
-    int totalBStats = 10;
-    int totalSStats = 5;
+    int totalBStats = 10; // Look at nearest 10 bullets
+    int totalSStats = 5; // Look at nearest 5 enemy ships
+    int totalSPStats = 5; // Look at nearest 5 score pickups
 
     foreach (BulletComponent bs in Gamemaster.Instance.bulletsNearPlayer)
     {
@@ -51,8 +52,6 @@ public class PlayerAgent : Agent
       //Relative Y to Player
       AddVectorObs(CalcRelativePos(distFromPlayer.y, -10f, 10f));
 
-      //Direction of Bullet (normalized vector)
-      AddVectorObs(bs.stats.direction);
       //Speed of Bullet (Percentage of player's max speed)
       AddVectorObs(bs.stats.velocity / p.stats.movespeed);
     }
@@ -61,7 +60,6 @@ public class PlayerAgent : Agent
     {
       AddVectorObs(1); //Relative X
       AddVectorObs(1); //Relative Y
-      AddVectorObs(new Vector2(0, 0)); //Direction
       AddVectorObs(0); //Velocity
     }
 
@@ -74,15 +72,33 @@ public class PlayerAgent : Agent
       AddVectorObs(CalcRelativePos(distFromPlayer.x, -5f, 5f));
       //Relative Y to Player
       AddVectorObs(CalcRelativePos(distFromPlayer.y, -10f, 10f));
-      //Score of Ship
-      AddVectorObs(ss.stats.score / 40); //Score is score of ship divided by maximum enemy ship score
     }
 
     for (int i = 0; i < totalSStats - Gamemaster.Instance.enemiesByValue.Count; i++)
     {
       AddVectorObs(1); //Relative X
       AddVectorObs(1); //Relative Y
-      AddVectorObs(0); //Score
+    }
+
+    foreach (ScorePickupMovement spm in Gamemaster.Instance.scorePickupsNearPlayer)
+    {
+      //Relative Dist from Player
+      Vector2 distFromPlayer = p.stats.position - spm.stats.position;
+
+      //Relative X to Player
+      AddVectorObs(CalcRelativePos(distFromPlayer.x, -5f, 5f));
+      //Relative Y to Player
+      AddVectorObs(CalcRelativePos(distFromPlayer.y, -10f, 10f));
+
+      //Speed of Bullet (Percentage of player's max speed)
+      AddVectorObs(spm.stats.velocity / p.stats.movespeed);
+    }
+
+    for (int i = 0; i < totalSPStats - Gamemaster.Instance.scorePickupsNearPlayer.Count; i++)
+    {
+      AddVectorObs(1); //Relative X
+      AddVectorObs(1); //Relative Y
+      AddVectorObs(0); //Velocity
     }
   }
 
@@ -93,6 +109,9 @@ public class PlayerAgent : Agent
 
     float speed = p.stats.movespeed * Time.deltaTime;
     Vector2 newPos = p.stats.position;
+
+    // Rewarded for staying alive
+    SetReward(.0001f);
 
     switch (action)
     {
@@ -112,14 +131,12 @@ public class PlayerAgent : Agent
         {
           //Left
           newPos.x -= speed;
-          SetReward(.0001f);
           break;
         }
       case 4:
         {
           //Right
           newPos.x += speed;
-          SetReward(.0001f);
           break;
         }
     }
@@ -131,14 +148,12 @@ public class PlayerAgent : Agent
     newPos.y = Mathf.Clamp(newPos.y, -boundY, boundY);
 
     // Avoid the top if possible
-    if (newPos.y > 0)
-    {
-      SetReward(-.1f * newPos.y);
-    }
+    // Reward staying low
+    SetReward(-.00005f * newPos.y);
 
     // Avoid the outer edges
-    float xDeviation = Mathf.Abs(CalcRelativePos(newPos.x, -5f, 5f));
-    SetReward(-.001f * xDeviation);
+    float xDeviation = Mathf.Pow(CalcRelativePos(newPos.x, -5f, 5f), 2f);
+    SetReward(-.00001f * xDeviation);
 
     p.stats.position = newPos;
     transform.position = newPos;

@@ -43,6 +43,8 @@ public class ScorePickupMovement : BulletComponent
     if (collision.tag == "PlayerShip")
     {
       Gamemaster.Instance.UpdatePlayerScore(10);
+      PlayerAgent pa = Gamemaster.Instance.player.GetComponent<PlayerAgent>();
+      pa.SetReward(.00005f); // Rewarded for chasing these drops
       Destroy(gameObject);
     }
   }

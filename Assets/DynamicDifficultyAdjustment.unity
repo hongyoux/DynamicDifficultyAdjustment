@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   broadcastHub:
     broadcastingBrains:
-    - {fileID: 0}
+    - {fileID: 11400000, guid: 63703186dc7ec194e812b6f683341254, type: 2}
     - {fileID: 11400000, guid: 2e1039d87a7395d47abd15843c6481c4, type: 2}
     - {fileID: 11400000, guid: d3e06b9f9ef82d941b359e3549cb6891, type: 2}
     - {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d, type: 2}
@@ -168,7 +168,7 @@ MonoBehaviour:
     height: 80
     qualityLevel: 5
     timeScale: 1
-    targetFrameRate: 144
+    targetFrameRate: 60
   inferenceConfiguration:
     width: 1280
     height: 720
@@ -410,5 +410,20 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 324600173}
+    - target: {fileID: 6923693459445542900, guid: 883c16db99981e945ad11450169c8adf,
+        type: 3}
+      propertyPath: m_Name
+      value: Time
+      objectReference: {fileID: 0}
+    - target: {fileID: 6923693460001872892, guid: 883c16db99981e945ad11450169c8adf,
+        type: 3}
+      propertyPath: m_Name
+      value: Time
+      objectReference: {fileID: 0}
+    - target: {fileID: 6923693460001872890, guid: 883c16db99981e945ad11450169c8adf,
+        type: 3}
+      propertyPath: m_Text
+      value: 'Time:'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 883c16db99981e945ad11450169c8adf, type: 3}

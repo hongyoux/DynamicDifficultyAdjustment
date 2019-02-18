@@ -24,6 +24,9 @@ public class EnemyBulletComponent : BulletComponent
         case ShipType.SWIRL:
           index = 2;
           break;
+        case ShipType.SWEEP:
+          index = 3;
+          break;
       }
 
       if (index == -1)

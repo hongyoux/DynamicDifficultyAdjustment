@@ -6,7 +6,7 @@ public class ChaseEnemyWeapon : WeaponComponent
 {
   Vector3 targetPos;
 
-  private void Start()
+  protected override void Init()
   {
     targetPos = new Vector3(0, -10, 1);
   }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DDAPlayerPlayerBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 67
-    numStackedVectorObservations: 1
+    vectorObservationSize: 57
+    numStackedVectorObservations: 3
     vectorActionSize: 05000000
     cameraResolutions: []
     vectorActionDescriptions:

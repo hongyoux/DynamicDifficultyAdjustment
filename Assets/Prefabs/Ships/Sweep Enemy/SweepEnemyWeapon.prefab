@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6060353369628478792}
-  - component: {fileID: 6169113584102066042}
+  - component: {fileID: 7457645545118844095}
   m_Layer: 0
   m_Name: SweepEnemyWeapon
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6169113584102066042
+--- !u!114 &7457645545118844095
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,10 +40,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6056985926301157248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aabe0b091dc1c6479e022b226624584, type: 3}
+  m_Script: {fileID: 11500000, guid: 540968badf208f747a02d25ec48a3d98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0.75
+  cooldown: 1.5
   bullet: {fileID: 3982763822424022566, guid: 8c5a8cd3a833d4441998ec47e6f0fcc0, type: 3}
   spawnPoints:
   - {fileID: 6060353369628478792}

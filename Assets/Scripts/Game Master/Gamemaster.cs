@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -15,6 +16,7 @@ public class Gamemaster : MonoBehaviour
   public static GameObject bullets;
   public static GameObject ships;
   public static GameObject waves;
+  public static GameObject scoreObjs;
 
   [HideInInspector]
   public float timeStart;
@@ -31,11 +33,11 @@ public class Gamemaster : MonoBehaviour
   [HideInInspector]
   public int targetTime = 300; //Seconds (5 minute gameplay session)
 
-  [HideInInspector]
   public List<BulletComponent> bulletsNearPlayer;
 
-  [HideInInspector]
   public List<Ship> enemiesByValue;
+
+  public List<ScorePickupMovement> scorePickupsNearPlayer;
 
   private Player p;
   private PlayerAgent pa;
@@ -87,8 +89,11 @@ public class Gamemaster : MonoBehaviour
     waves = new GameObject("waves");
     waves.transform.parent = transform;
 
+    scoreObjs = new GameObject("scoreObjs");
+    scoreObjs.transform.parent = transform;
+
     totalPossiblePoints = 0;
-    damageDealtByBullets = new int[3]; // Reset to empty array of damage dealt
+    damageDealtByBullets = new int[4]; // Reset to empty array of damage dealt
     timeStart = Time.time;
 
     sf.Reset();
@@ -101,6 +106,7 @@ public class Gamemaster : MonoBehaviour
     Destroy(bullets);
     Destroy(ships);
     Destroy(waves);
+    Destroy(scoreObjs);
 
     sf.Stop();
   }
@@ -108,10 +114,24 @@ public class Gamemaster : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    uiComponent.UpdateUI(p.stats.currHealth, p.stats.lives, p.stats.score, 0.0f);
+    uiComponent.UpdateUI(p.stats.currHealth, p.stats.lives, p.stats.score, Time.time - timeStart);
 
     updateObservableEnemies();
     updateObservableBullets();
+    updateObservableScoreObjects();
+  }
+
+  private void updateObservableScoreObjects()
+  {
+    if (scoreObjs != null)
+    {
+      List<ScorePickupMovement> scorePickupsCopy = new List<ScorePickupMovement>(scoreObjs.GetComponentsInChildren<ScorePickupMovement>());
+      if (scorePickupsCopy.Count > 0)
+      {
+        scorePickupsCopy.Sort(SortByDistance);
+        scorePickupsNearPlayer = scorePickupsCopy.GetRange(0, Mathf.Min(scorePickupsCopy.Count, 5));
+      }
+    }
   }
 
   private void updateObservableEnemies()
@@ -122,7 +142,7 @@ public class Gamemaster : MonoBehaviour
 
       if (shipStatsCopy.Count > 0)
       {
-        shipStatsCopy.Sort(SortByScore);
+        shipStatsCopy.Sort(SortByDistance);
         enemiesByValue = shipStatsCopy.GetRange(0, Mathf.Min(shipStatsCopy.Count, 5));
       }
     }
@@ -138,21 +158,59 @@ public class Gamemaster : MonoBehaviour
     if (bullets != null)
     {
       // Sort list of Bullets for proximity to player
-      List<BulletComponent> bulletsCopy = new List<BulletComponent>(bullets.GetComponentsInChildren<EnemyBulletComponent>());
-      if (bulletsCopy.Count > 0)
+      List<BulletComponent> threatBullets = new List<BulletComponent>();
+      foreach (BulletComponent x in bullets.GetComponentsInChildren<EnemyBulletComponent>())
       {
-        bulletsCopy.Sort(SortByDistance);
-        bulletsNearPlayer = bulletsCopy.GetRange(0, Mathf.Min(bulletsCopy.Count, 10));
+        if (FilterByThreat(x))
+        {
+          threatBullets.Add(x);
+        }
+      }
+
+      if (threatBullets.Count > 0)
+      {
+        threatBullets.Sort(SortByTime);
+        bulletsNearPlayer = threatBullets.GetRange(0, Mathf.Min(threatBullets.Count, 10));
       }
     }
   }
 
   private int SortByDistance(BulletComponent a, BulletComponent b)
   {
-    int distA = (int)Vector3.Distance(new Vector3(a.stats.position.x, a.stats.position.y, 0), p.transform.position);
-    int distB = (int)Vector3.Distance(new Vector3(b.stats.position.x, b.stats.position.y, 0), p.transform.position);
+    float distA = Vector3.Distance(new Vector3(a.stats.position.x, a.stats.position.y, 0), p.transform.position);
+    float distB = Vector3.Distance(new Vector3(b.stats.position.x, b.stats.position.y, 0), p.transform.position);
 
     return distA.CompareTo(distB);
+  }
+  private int SortByDistance(Ship a, Ship b)
+  {
+    float distA = Vector3.Distance(new Vector3(a.stats.position.x, a.stats.position.y, 0), p.transform.position);
+    float distB = Vector3.Distance(new Vector3(b.stats.position.x, b.stats.position.y, 0), p.transform.position);
+
+    return distA.CompareTo(distB);
+  }
+
+  private int SortByTime(BulletComponent a, BulletComponent b)
+  {
+    float distA = Vector3.Distance(new Vector3(a.stats.position.x, a.stats.position.y, 0), p.transform.position);
+    float distB = Vector3.Distance(new Vector3(b.stats.position.x, b.stats.position.y, 0), p.transform.position);
+
+    float timeA = distA / a.stats.velocity;
+    float timeB = distB / a.stats.velocity;
+
+    return timeA.CompareTo(timeB);
+  }
+
+  private bool FilterByThreat(BulletComponent a)
+  {
+    Vector3 dirToPlayer = p.transform.position - new Vector3(a.stats.position.x, a.stats.position.y, 0f);
+    dirToPlayer.Normalize();
+
+    Vector3 direction = new Vector3(a.stats.direction.x, a.stats.direction.y, 0f).normalized;
+
+    float angleRad = Mathf.Acos(Vector3.Dot(dirToPlayer, direction));
+
+    return Mathf.Rad2Deg * angleRad < 5f;
   }
 
   public Player GetPlayer()
@@ -163,7 +221,7 @@ public class Gamemaster : MonoBehaviour
   public void UpdatePlayerScore(int score)
   {
     p.stats.score += score;
-    pa.SetReward(score * .05f);
+    pa.SetReward(score * .00001f);
     Logger.Instance.LogScore(p.stats.score);
   }
 
@@ -173,8 +231,9 @@ public class Gamemaster : MonoBehaviour
      * Basic ship = 0
      * Chase ship = 1
      * Swirl ship = 2
+     * Sweep ship = 3
      */
-    int[] shipsCount = new int[3];
+    int[] shipsCount = new int[4];
 
     if (ships != null)
     {
@@ -192,6 +251,9 @@ public class Gamemaster : MonoBehaviour
           case ShipType.SWIRL:
             shipsCount[2]++;
             break;
+          case ShipType.SWEEP:
+            shipsCount[3]++;
+            break;
         }
       }
     }
@@ -204,8 +266,8 @@ public class Gamemaster : MonoBehaviour
     float scorePercentage = p.stats.score / totalPossiblePoints;
     float timePercentage = (Time.time - timeStart) / targetTime;
 
-    gma.SetReward(scorePercentage * 2); // Someone doing well gives more reward to hit more
-    gma.SetReward(timePercentage); // Over time, bullets should hit more often.
+    gma.SetReward(scorePercentage * .02f); // Someone doing well gives more reward to hit more
+    gma.SetReward(timePercentage * .02f); // Over time, bullets should hit more often.
   }
 
   public void SpawnWaveReward(int index)
@@ -223,6 +285,6 @@ public class Gamemaster : MonoBehaviour
       percentOfWave = waveCount[index] / totalWaves;
     }
 
-    gma.SetReward((1 - percentOfWave) * 3); // Between 0 and 3. Rewarded more for spawning low percentage waves. 120 waves in 10 minutes, on average 1.5* 120 = ~180 points.
+    gma.SetReward((1 - percentOfWave) * .01f); // Between 0 and .01. Rewarded more for spawning low percentage waves. 120 waves in 10 minutes, ~1.2 points total.
   }
 }

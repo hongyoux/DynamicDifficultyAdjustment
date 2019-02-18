@@ -10,7 +10,7 @@ public class SweepEnemyWeapon : WeaponComponent
   private int count;
   private bool active;
 
-  private void Start()
+  protected override void Init()
   {
     fireNum = 5;
     intBtwn = .1f;

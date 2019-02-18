@@ -27,7 +27,7 @@ public class GamemasterAgent : Agent
   public override void AgentAction(float[] vectorAction, string textAction)
   {
     int index = Mathf.FloorToInt(vectorAction[0]);
-    Debug.Log(string.Format("Agent Action Requested! Spawning Wave {0}", index));
+    //Debug.Log(string.Format("Agent Action Requested! Spawning Wave {0}", index));
     Gamemaster.Instance.sf.SpawnWave(index);
   }
 

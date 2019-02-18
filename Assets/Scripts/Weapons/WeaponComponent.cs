@@ -12,7 +12,14 @@ public class WeaponComponent : MonoBehaviour
   // Use this for initialization
   void Start()
   {
-    nextFire = 0;
+    Init();
+  }
+
+  virtual protected void Init() { }
+
+  public void SetInitialFireTime(float x)
+  {
+    nextFire = Time.time + x;
   }
 
   public void Fire() { Fire(0); }
@@ -25,7 +32,7 @@ public class WeaponComponent : MonoBehaviour
   {
     return Time.time > nextFire;
   }
-
+  
   public void CoolingDown()
   {
     nextFire = Time.time + cooldown;

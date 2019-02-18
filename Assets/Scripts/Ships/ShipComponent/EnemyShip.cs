@@ -22,6 +22,9 @@ public class EnemyShip : Ship
     Logger.Instance.LogKill(stats.name);
     Gamemaster.Instance.UpdatePlayerScore(stats.score);
 
+    PlayerAgent pa = Gamemaster.Instance.player.GetComponent<PlayerAgent>();
+    pa.SetReward(.0001f); //Reward extra for destroying an enemy
+
     //Spawn a powerup here.
     SpawnScorePickup();
 
@@ -40,8 +43,11 @@ public class EnemyShip : Ship
 
   protected void SpawnScorePickup()
   {
-    GameObject pickup = Instantiate(Gamemaster.Instance.scorePickup, transform.position, transform.rotation, Gamemaster.bullets.transform);
+    GameObject pickup = Instantiate(Gamemaster.Instance.scorePickup, transform.position, transform.rotation, Gamemaster.scoreObjs.transform);
     ScorePickupMovement spm = pickup.GetComponent<ScorePickupMovement>();
+
+    Gamemaster.Instance.totalPossiblePoints += 10; // Even if ship doesn't break, total score goes up
+
     spm.stats.position = transform.position;
   }
 }

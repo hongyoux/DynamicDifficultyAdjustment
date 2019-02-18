@@ -10,7 +10,7 @@ public class UIComponent : MonoBehaviour
   private Text health;
   private Text lives;
   private Text score;
-  private Text difficulty;
+  private Text time;
 
   // Start is called before the first frame update
   void Start()
@@ -18,7 +18,7 @@ public class UIComponent : MonoBehaviour
     health = ui.transform.Find("Health").GetComponent<Text>();
     lives = ui.transform.Find("Lives").GetComponent<Text>();
     score = ui.transform.Find("Score").GetComponent<Text>();
-    difficulty = ui.transform.Find("Difficulty").GetComponent<Text>();
+    time = ui.transform.Find("Time").GetComponent<Text>();
   }
 
   // Update is called once per frame
@@ -32,6 +32,6 @@ public class UIComponent : MonoBehaviour
     health.text = string.Format("{0}", h.ToString());
     lives.text = string.Format("{0}", l.ToString());
     score.text = string.Format("{0}", s.ToString());
-    difficulty.text = string.Format("{0}", d.ToString());
+    time.text = string.Format("{0:F2}", d);
   }
 }
