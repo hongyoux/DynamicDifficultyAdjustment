@@ -58,8 +58,8 @@ public class PlayerAgent : Agent
 
     for (int i = 0; i < totalBStats - Gamemaster.Instance.bulletsNearPlayer.Count; i++)
     {
-      AddVectorObs(1); //Relative X
-      AddVectorObs(1); //Relative Y
+      AddVectorObs(-1); //Relative X
+      AddVectorObs(-1); //Relative Y
       AddVectorObs(0); //Velocity
     }
 
@@ -76,8 +76,8 @@ public class PlayerAgent : Agent
 
     for (int i = 0; i < totalSStats - Gamemaster.Instance.enemiesByValue.Count; i++)
     {
-      AddVectorObs(1); //Relative X
-      AddVectorObs(1); //Relative Y
+      AddVectorObs(-1); //Relative X
+      AddVectorObs(-1); //Relative Y
     }
 
     foreach (ScorePickupMovement spm in Gamemaster.Instance.scorePickupsNearPlayer)
@@ -96,8 +96,8 @@ public class PlayerAgent : Agent
 
     for (int i = 0; i < totalSPStats - Gamemaster.Instance.scorePickupsNearPlayer.Count; i++)
     {
-      AddVectorObs(1); //Relative X
-      AddVectorObs(1); //Relative Y
+      AddVectorObs(-1); //Relative X
+      AddVectorObs(-1); //Relative Y
       AddVectorObs(0); //Velocity
     }
   }
@@ -109,9 +109,6 @@ public class PlayerAgent : Agent
 
     float speed = p.stats.movespeed * Time.deltaTime;
     Vector2 newPos = p.stats.position;
-
-    // Rewarded for staying alive
-    SetReward(.0001f);
 
     switch (action)
     {
@@ -150,10 +147,6 @@ public class PlayerAgent : Agent
     // Avoid the top if possible
     // Reward staying low
     SetReward(-.00005f * newPos.y);
-
-    // Avoid the outer edges
-    float xDeviation = Mathf.Pow(CalcRelativePos(newPos.x, -5f, 5f), 2f);
-    SetReward(-.00001f * xDeviation);
 
     p.stats.position = newPos;
     transform.position = newPos;

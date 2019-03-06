@@ -213,7 +213,7 @@ public class Gamemaster : MonoBehaviour
 
     float angleRad = Mathf.Acos(Vector3.Dot(dirToPlayer, direction));
 
-    return Mathf.Rad2Deg * angleRad < 5f;
+    return Mathf.Rad2Deg * angleRad < 3f;
   }
 
   public Player GetPlayer()

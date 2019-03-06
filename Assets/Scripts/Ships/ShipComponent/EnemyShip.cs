@@ -23,7 +23,7 @@ public class EnemyShip : Ship
     Gamemaster.Instance.UpdatePlayerScore(stats.score);
 
     PlayerAgent pa = Gamemaster.Instance.player.GetComponent<PlayerAgent>();
-    pa.SetReward(.0001f); //Reward extra for destroying an enemy
+    pa.SetReward(.0005f); //Reward extra for destroying an enemy
 
     //Spawn a powerup here.
     SpawnScorePickup();

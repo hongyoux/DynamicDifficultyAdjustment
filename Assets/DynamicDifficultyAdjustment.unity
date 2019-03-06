@@ -137,7 +137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249552966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15582612, y: -0.051177084, z: -2.0546875}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -161,13 +161,14 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 2e1039d87a7395d47abd15843c6481c4, type: 2}
     - {fileID: 11400000, guid: d3e06b9f9ef82d941b359e3549cb6891, type: 2}
     - {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d, type: 2}
-    _brainsToControl: []
+    _brainsToControl:
+    - {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d, type: 2}
   maxSteps: 0
   trainingConfiguration:
-    width: 80
-    height: 80
-    qualityLevel: 5
-    timeScale: 1
+    width: 1280
+    height: 720
+    qualityLevel: 1
+    timeScale: 100
     targetFrameRate: 60
   inferenceConfiguration:
     width: 1280
@@ -405,17 +406,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6923693460450538155, guid: 883c16db99981e945ad11450169c8adf,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 324600173}
     - target: {fileID: 6923693459445542900, guid: 883c16db99981e945ad11450169c8adf,
-        type: 3}
-      propertyPath: m_Name
-      value: Time
-      objectReference: {fileID: 0}
-    - target: {fileID: 6923693460001872892, guid: 883c16db99981e945ad11450169c8adf,
         type: 3}
       propertyPath: m_Name
       value: Time
@@ -425,5 +416,20 @@ PrefabInstance:
       propertyPath: m_Text
       value: 'Time:'
       objectReference: {fileID: 0}
+    - target: {fileID: 6923693460001872892, guid: 883c16db99981e945ad11450169c8adf,
+        type: 3}
+      propertyPath: m_Name
+      value: Time
+      objectReference: {fileID: 0}
+    - target: {fileID: 6923693460450538155, guid: 883c16db99981e945ad11450169c8adf,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 324600173}
+    - target: {fileID: 800253297, guid: 883c16db99981e945ad11450169c8adf, type: 3}
+      propertyPath: brain
+      value: 
+      objectReference: {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 883c16db99981e945ad11450169c8adf, type: 3}

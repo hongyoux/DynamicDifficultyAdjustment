@@ -37,6 +37,8 @@ public class ShipFactory : MonoBehaviour
       // Really should be agent action.
       Gamemaster.Instance.GetComponent<GamemasterAgent>().RequestDecision();
       cooldown = Time.time + timeBetweenWaves;
+
+      timeBetweenWaves = 5 - 2 * (Time.time - Gamemaster.Instance.timeStart) / Gamemaster.Instance.targetTime; // at target time, spawning every 3 seconds
     }
   }
 

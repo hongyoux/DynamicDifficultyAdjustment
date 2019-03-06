@@ -45,7 +45,8 @@ public class GamemasterAgent : Agent
     //Get Player score (Percentage of total possible points earned)
     if (Gamemaster.Instance.totalPossiblePoints == 0) {
       AddVectorObs(0f);
-    } else
+    }
+    else
     {
       AddVectorObs(p.stats.score / Gamemaster.Instance.totalPossiblePoints);
     }
