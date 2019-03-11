@@ -27,7 +27,7 @@ public class GamemasterAgent : Agent
   public override void AgentAction(float[] vectorAction, string textAction)
   {
     int index = Mathf.FloorToInt(vectorAction[0]);
-    //Debug.Log(string.Format("Agent Action Requested! Spawning Wave {0}", index));
+    Debug.Log(string.Format("Agent Action Requested! Spawning Wave {0}", index));
     Gamemaster.Instance.sf.SpawnWave(index);
   }
 
@@ -40,16 +40,10 @@ public class GamemasterAgent : Agent
     AddVectorObs(CalcRelativePos(p.stats.position.y, -10f, 10f));
 
     //Get Player health (Percentage)
-    AddVectorObs(p.stats.currHealth / p.stats.maxHealth);
+    AddVectorObs(p.stats.currHealth);
 
     //Get Player score (Percentage of total possible points earned)
-    if (Gamemaster.Instance.totalPossiblePoints == 0) {
-      AddVectorObs(0f);
-    }
-    else
-    {
-      AddVectorObs(p.stats.score / Gamemaster.Instance.totalPossiblePoints);
-    }
+    AddVectorObs(p.stats.score);
   }
 
   private float CalcRelativePos(float val, float min, float max)

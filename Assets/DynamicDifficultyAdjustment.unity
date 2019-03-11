@@ -161,14 +161,13 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 2e1039d87a7395d47abd15843c6481c4, type: 2}
     - {fileID: 11400000, guid: d3e06b9f9ef82d941b359e3549cb6891, type: 2}
     - {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d, type: 2}
-    _brainsToControl:
-    - {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d, type: 2}
+    _brainsToControl: []
   maxSteps: 0
   trainingConfiguration:
     width: 1280
     height: 720
     qualityLevel: 1
-    timeScale: 100
+    timeScale: 1
     targetFrameRate: 60
   inferenceConfiguration:
     width: 1280
@@ -270,6 +269,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1236970168 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5418969512240259296, guid: 883c16db99981e945ad11450169c8adf,
+    type: 3}
+  m_PrefabInstance: {fileID: 6923693460490240870}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1852151626
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,21 +411,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6923693459445542900, guid: 883c16db99981e945ad11450169c8adf,
-        type: 3}
-      propertyPath: m_Name
-      value: Time
-      objectReference: {fileID: 0}
-    - target: {fileID: 6923693460001872890, guid: 883c16db99981e945ad11450169c8adf,
-        type: 3}
-      propertyPath: m_Text
-      value: 'Time:'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6923693460001872892, guid: 883c16db99981e945ad11450169c8adf,
-        type: 3}
-      propertyPath: m_Name
-      value: Time
-      objectReference: {fileID: 0}
     - target: {fileID: 6923693460450538155, guid: 883c16db99981e945ad11450169c8adf,
         type: 3}
       propertyPath: m_Camera
@@ -429,7 +419,12 @@ PrefabInstance:
     - target: {fileID: 800253297, guid: 883c16db99981e945ad11450169c8adf, type: 3}
       propertyPath: brain
       value: 
-      objectReference: {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d,
+      objectReference: {fileID: 11400000, guid: d3e06b9f9ef82d941b359e3549cb6891,
         type: 2}
+    - target: {fileID: 4740158141292477589, guid: 883c16db99981e945ad11450169c8adf,
+        type: 3}
+      propertyPath: waypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1236970168}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 883c16db99981e945ad11450169c8adf, type: 3}

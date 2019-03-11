@@ -102,8 +102,8 @@ public class Gamemaster : MonoBehaviour
   public void Stop()
   {
     float totalTime = Time.time - timeStart;
-    float distFromTarget = Mathf.Abs(totalTime - targetTime);
-    gma.SetReward(1 - (distFromTarget / targetTime) * 2); // 1 if hit target time, else -1 to 1 to -x.
+    float distFromTargetTime = Mathf.Abs(totalTime - targetTime);
+    gma.SetReward(1 - (distFromTargetTime / targetTime) * 2); // 1 if hit target time, else -1 to 1 to -x.
     gma.Done();
 
     Destroy(bullets);
@@ -267,10 +267,10 @@ public class Gamemaster : MonoBehaviour
   public void PlayerHitReward()
   {
     float scorePercentage = p.stats.score / totalPossiblePoints;
-    float timePercentage = (Time.time - timeStart) / targetTime;
+    float currentTime = (Time.time - timeStart);
 
-    gma.SetReward(scorePercentage * .05f); // Someone doing well gives more reward to hit more.
-    gma.SetReward(timePercentage * .05f); // Over time, bullets should hit more often.
+    gma.SetReward(p.stats.score * .0001f); // Someone doing well gives more reward to hit more.
+    gma.SetReward(currentTime * .001f); // Over time, bullets should hit more often.
   }
 
   public void SpawnWaveReward(int index)

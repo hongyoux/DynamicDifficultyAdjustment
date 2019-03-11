@@ -2727,7 +2727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3394661a7c6024da04eb3aae55f7b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brain: {fileID: 11400000, guid: d3e06b9f9ef82d941b359e3549cb6891, type: 2}
+  brain: {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d, type: 2}
   agentParameters:
     agentCameras: []
     maxStep: 0
@@ -2916,7 +2916,7 @@ GameObject:
   - component: {fileID: 6923693459445542899}
   - component: {fileID: 6923693459445542898}
   m_Layer: 5
-  m_Name: Difficulty
+  m_Name: Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3465,7 +3465,7 @@ GameObject:
   - component: {fileID: 6923693460001872891}
   - component: {fileID: 6923693460001872890}
   m_Layer: 5
-  m_Name: Difficulty
+  m_Name: Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3531,7 +3531,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Difficulty:'
+  m_Text: 'Time:'
 --- !u!1 &6923693460142172481
 GameObject:
   m_ObjectHideFlags: 0
