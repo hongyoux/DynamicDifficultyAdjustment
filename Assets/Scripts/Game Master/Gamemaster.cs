@@ -269,8 +269,8 @@ public class Gamemaster : MonoBehaviour
     float scorePercentage = p.stats.score / totalPossiblePoints;
     float currentTime = (Time.time - timeStart);
 
-    gma.SetReward(p.stats.score * .0001f); // Someone doing well gives more reward to hit more.
-    gma.SetReward(currentTime * .001f); // Over time, bullets should hit more often.
+    gma.SetReward(p.stats.score * .0005f); // Someone doing well gives more reward to hit more.
+    gma.SetReward(currentTime * .0005f); // Over time, bullets should hit more often.
   }
 
   public void SpawnWaveReward(int index)
@@ -288,6 +288,6 @@ public class Gamemaster : MonoBehaviour
       percentOfWave = waveCount[index] / totalWaves;
     }
 
-    gma.SetReward((1 - percentOfWave) * .01f); // Between 0 and .01. Rewarded more for spawning low percentage waves. 120 waves in 10 minutes, ~1.2 points total.
+    gma.SetReward(.005f / waveCount[index]); // Between 0 and .01. Rewarded more for spawning low percentage waves. 120 waves in 10 minutes, ~1.2 points total.
   }
 }
