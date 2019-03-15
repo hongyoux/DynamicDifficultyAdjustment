@@ -69,9 +69,11 @@ public class GamemasterAgent : Agent
     {
       for (int i = 0; i < summonedPercentage.Length; i++)
       {
-        summonedPercentage[i] = summonedSoFar[i] / total;
+        summonedPercentage[i] = (float)summonedSoFar[i] / total;
       }
     }
+
+    Debug.Log(summonedPercentage.ToString());
 
     AddVectorObs(summonedPercentage);
   }
@@ -83,7 +85,7 @@ public class GamemasterAgent : Agent
 
     float[] shipsCountPercentage = new float[shipsCount.Length];
 
-    foreach (int i in shipsCountPercentage)
+    foreach (int i in shipsCount)
     {
       total += i;
     }
@@ -92,9 +94,11 @@ public class GamemasterAgent : Agent
     {
       for (int i = 0; i < shipsCountPercentage.Length; i++)
       {
-        shipsCountPercentage[i] = shipsCount[i] / total;
+        shipsCountPercentage[i] = (float)shipsCount[i] / total;
       }
     }
+
+    Debug.Log(shipsCountPercentage.ToString());
 
     AddVectorObs(shipsCountPercentage);
   }
@@ -104,14 +108,16 @@ public class GamemasterAgent : Agent
     Player p = Gamemaster.Instance.GetPlayer();
     int[] dmgTaken = Gamemaster.Instance.damageDealtByBullets;
 
-    float[] percentMHealth = new float[dmgTaken.Length];
+    float[] dmgTakenAsFloats = new float[dmgTaken.Length];
 
     for (int i = 0; i < dmgTaken.Length; i++)
     {
-      percentMHealth[i] = dmgTaken[i] / p.stats.maxHealth;
+      dmgTakenAsFloats[i] = (float)dmgTaken[i];
     }
 
-    AddVectorObs(percentMHealth);
+    Debug.Log(dmgTakenAsFloats.ToString());
+
+    AddVectorObs(dmgTakenAsFloats);
   }
 
 }

@@ -167,7 +167,7 @@ MonoBehaviour:
   trainingConfiguration:
     width: 1280
     height: 720
-    qualityLevel: 1
+    qualityLevel: 5
     timeScale: 1
     targetFrameRate: 60
   inferenceConfiguration:

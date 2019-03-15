@@ -31,7 +31,7 @@ public class Gamemaster : MonoBehaviour
   public int[] damageDealtByBullets;
 
   [HideInInspector]
-  public int targetTime = 300; //Seconds (5 minute gameplay session)
+  public int targetTime; //Seconds (5 minute gameplay session)
 
   public List<BulletComponent> bulletsNearPlayer;
 
@@ -47,6 +47,7 @@ public class Gamemaster : MonoBehaviour
   // Use this for initialization
   void Awake()
   {
+    targetTime = 300;
     InitOnce();
     Reset();
 
@@ -103,7 +104,7 @@ public class Gamemaster : MonoBehaviour
   {
     float totalTime = Time.time - timeStart;
     float distFromTargetTime = Mathf.Abs(totalTime - targetTime);
-    gma.SetReward(1 - (distFromTargetTime / targetTime) * 2); // 1 if hit target time, else -1 to 1 to -x.
+    gma.SetReward(1f - (distFromTargetTime / targetTime) * 2f); // 1 if hit target time, else -1 to 1 to -x.
     gma.Done();
 
     Destroy(bullets);
@@ -269,8 +270,8 @@ public class Gamemaster : MonoBehaviour
     float scorePercentage = p.stats.score / totalPossiblePoints;
     float currentTime = (Time.time - timeStart);
 
-    gma.SetReward(p.stats.score * .0005f); // Someone doing well gives more reward to hit more.
-    gma.SetReward(currentTime * .0005f); // Over time, bullets should hit more often.
+    gma.SetReward(p.stats.score * .00005f); // Someone doing well gives more reward to hit more.
+    gma.SetReward(currentTime * .00005f); // Over time, bullets should hit more often.
   }
 
   public void SpawnWaveReward(int index)
@@ -285,9 +286,9 @@ public class Gamemaster : MonoBehaviour
 
     if (totalWaves > 0)
     {
-      percentOfWave = waveCount[index] / totalWaves;
+      percentOfWave = (float)waveCount[index] / totalWaves;
     }
 
-    gma.SetReward(.005f / waveCount[index]); // Between 0 and .01. Rewarded more for spawning low percentage waves. 120 waves in 10 minutes, ~1.2 points total.
+    gma.SetReward(.0005f * percentOfWave); // Between 0 and .01. Rewarded more for spawning low percentage waves. 120 waves in 10 minutes, ~1.2 points total.
   }
 }
