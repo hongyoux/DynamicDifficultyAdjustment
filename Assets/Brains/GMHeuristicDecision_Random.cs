@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
 
-public class GMHeuristicDecision : Decision
+public class GMHeuristicDecision_Random : Decision
 {
   int count = 0;
 

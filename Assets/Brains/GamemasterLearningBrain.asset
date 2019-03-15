@@ -15,7 +15,7 @@ MonoBehaviour:
   brainParameters:
     vectorObservationSize: 36
     numStackedVectorObservations: 3
-    vectorActionSize: 17000000
+    vectorActionSize: 18000000
     cameraResolutions: []
     vectorActionDescriptions:
     - Index of wave to send

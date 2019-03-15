@@ -15,11 +15,11 @@ MonoBehaviour:
   brainParameters:
     vectorObservationSize: 36
     numStackedVectorObservations: 1
-    vectorActionSize: 17000000
+    vectorActionSize: 18000000
     cameraResolutions: []
     vectorActionDescriptions:
     - Index of wave to send
     vectorActionSpaceType: 0
   decision: {fileID: 0}
-  decisionScript: {fileID: 11500000, guid: d41593a530dc94a44bab7992221bba98, type: 3}
-  c_decision: GMHeuristicDecision
+  decisionScript: {fileID: 0}
+  c_decision: 
