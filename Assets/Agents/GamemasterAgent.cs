@@ -49,19 +49,22 @@ public class GamemasterAgent : Agent
   {
     Player p = Gamemaster.Instance.GetPlayer();
 
-    //Get Player relative position (normalized between -1 and 1)
-    AddVectorObs(CalcRelativePos(p.stats.position.x, -5f, 5f));
-    AddVectorObs(CalcRelativePos(p.stats.position.y, -10f, 10f));
-
     //Get Player health (Percentage)
     AddVectorObs(p.stats.currHealth);
 
+    Debug.Log(string.Format("Player's current Health: {0}", p.stats.currHealth));
+
     //Get Health Lost since previous action
-    AddVectorObs(previousHP - p.stats.currHealth);
+    float lostHealth = previousHP - p.stats.currHealth;
+    AddVectorObs(lostHealth);
     previousHP = p.stats.currHealth;
+
+    Debug.Log(string.Format("Health Lost Between Rounds: {0}", lostHealth));
 
     //Get Player score (Percentage of total possible points earned)
     AddVectorObs(p.stats.score);
+
+    Debug.Log(string.Format("Player's Current Score: {0}", p.stats.score));
   }
 
   private float CalcRelativePos(float val, float min, float max)
