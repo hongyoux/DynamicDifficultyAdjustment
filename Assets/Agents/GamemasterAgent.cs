@@ -5,8 +5,16 @@ using MLAgents;
 
 public class GamemasterAgent : Agent
 {
+  float previousHP;
+
+  private void Start()
+  {
+    previousHP = Gamemaster.Instance.GetPlayer().stats.maxHealth;
+  }
+
   public override void AgentReset()
   {
+    previousHP = Gamemaster.Instance.GetPlayer().stats.maxHealth;
     base.AgentReset();
   }
 
@@ -47,6 +55,10 @@ public class GamemasterAgent : Agent
 
     //Get Player health (Percentage)
     AddVectorObs(p.stats.currHealth);
+
+    //Get Health Lost since previous action
+    AddVectorObs(previousHP - p.stats.currHealth);
+    previousHP = p.stats.currHealth;
 
     //Get Player score (Percentage of total possible points earned)
     AddVectorObs(p.stats.score);

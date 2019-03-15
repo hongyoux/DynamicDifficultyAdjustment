@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GamemasterHeuristicBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 36
+    vectorObservationSize: 37
     numStackedVectorObservations: 1
     vectorActionSize: 17000000
     cameraResolutions: []
