@@ -95,6 +95,7 @@ public class Gamemaster : MonoBehaviour
 
     totalPossiblePoints = 0;
     damageDealtByBullets = new int[4]; // Reset to empty array of damage dealt
+    
     timeStart = Time.time;
 
     sf.Reset();

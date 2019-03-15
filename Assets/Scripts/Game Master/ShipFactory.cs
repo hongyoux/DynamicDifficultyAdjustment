@@ -39,12 +39,16 @@ public class ShipFactory : MonoBehaviour
       cooldown = Time.time + timeBetweenWaves;
 
       timeBetweenWaves = 5 - 2 * (Time.time - Gamemaster.Instance.timeStart) / Gamemaster.Instance.targetTime; // at target time, spawning every 3 seconds
+
+      Debug.Log(string.Format("Time between waves: {0}", timeBetweenWaves));
     }
   }
 
   public void Reset()
   {
     cooldown = Time.time + timeBetweenWaves;
+    timeBetweenWaves = 5;
+    waveCount = new int[waves.Count];
     stopped = false;
   }
 

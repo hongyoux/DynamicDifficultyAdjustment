@@ -27,8 +27,14 @@ public class GamemasterAgent : Agent
   public override void AgentAction(float[] vectorAction, string textAction)
   {
     int index = Mathf.FloorToInt(vectorAction[0]);
-    Debug.Log(string.Format("Agent Action Requested! Spawning Wave {0}", index));
-    Gamemaster.Instance.sf.SpawnWave(index);
+    if (index == 0)
+    {
+      // This is the do nothing action
+      return;
+    }
+
+    Debug.Log(string.Format("Agent Action Requested! Spawning Wave {0}", index - 1));
+    Gamemaster.Instance.sf.SpawnWave(index - 1);
   }
 
   private void ObservePlayerStats()
@@ -58,7 +64,7 @@ public class GamemasterAgent : Agent
     int[] summonedSoFar = Gamemaster.Instance.sf.GetSummonedWavesSoFar();
     int total = 0;
 
-    float[] summonedPercentage = new float[summonedSoFar.Length];
+    float[] summonedSoFarFloat = new float[summonedSoFar.Length];
 
     foreach (int i in summonedSoFar)
     {
@@ -67,15 +73,15 @@ public class GamemasterAgent : Agent
 
     if (total != 0)
     {
-      for (int i = 0; i < summonedPercentage.Length; i++)
+      for (int i = 0; i < summonedSoFarFloat.Length; i++)
       {
-        summonedPercentage[i] = (float)summonedSoFar[i] / total;
+        summonedSoFarFloat[i] = (float)summonedSoFar[i];
       }
     }
 
-    Debug.Log(summonedPercentage.ToString());
+    Debug.Log(string.Format("Waves summoned so far: [{0}]", string.Join(",", summonedSoFarFloat)));
 
-    AddVectorObs(summonedPercentage);
+    AddVectorObs(summonedSoFarFloat);
   }
 
   private void ObservePercentageOfShipsOnScreen()
@@ -83,7 +89,7 @@ public class GamemasterAgent : Agent
     int[] shipsCount = Gamemaster.Instance.GetCountOfAllShips();
     int total = 0;
 
-    float[] shipsCountPercentage = new float[shipsCount.Length];
+    float[] shipsCountAsFloat = new float[shipsCount.Length];
 
     foreach (int i in shipsCount)
     {
@@ -92,15 +98,15 @@ public class GamemasterAgent : Agent
 
     if (total != 0)
     {
-      for (int i = 0; i < shipsCountPercentage.Length; i++)
+      for (int i = 0; i < shipsCountAsFloat.Length; i++)
       {
-        shipsCountPercentage[i] = (float)shipsCount[i] / total;
+        shipsCountAsFloat[i] = (float)shipsCount[i];
       }
     }
 
-    Debug.Log(shipsCountPercentage.ToString());
+    Debug.Log(string.Format("Ships on Screen: [{0}]", string.Join(",", shipsCountAsFloat)));
 
-    AddVectorObs(shipsCountPercentage);
+    AddVectorObs(shipsCountAsFloat);
   }
 
   private void ObservePercentageOfBulletDamageTaken()
@@ -115,7 +121,7 @@ public class GamemasterAgent : Agent
       dmgTakenAsFloats[i] = (float)dmgTaken[i];
     }
 
-    Debug.Log(dmgTakenAsFloats.ToString());
+    Debug.Log(string.Format("Damage Taken Per Enemy Type: [{0}]", string.Join(",", dmgTakenAsFloats)));
 
     AddVectorObs(dmgTakenAsFloats);
   }
