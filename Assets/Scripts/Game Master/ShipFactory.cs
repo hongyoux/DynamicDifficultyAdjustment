@@ -11,6 +11,8 @@ public class ShipFactory : MonoBehaviour
 
   private int[] waveCount;
 
+  public int[] waveCharges;
+
   private float cooldown;
   private float timeBetweenWaves;
 
@@ -23,6 +25,13 @@ public class ShipFactory : MonoBehaviour
     timeBetweenWaves = 5;
     cooldown = Time.time + timeBetweenWaves;
     waveCount = new int[waves.Count];
+
+    waveCharges = new int[waves.Count];
+    for (int i = 0; i < waves.Count; i++)
+    {
+      waveCharges[i] = 2;
+    }
+
   }
 
   // Update is called once per frame
@@ -49,6 +58,12 @@ public class ShipFactory : MonoBehaviour
     cooldown = Time.time + timeBetweenWaves;
     timeBetweenWaves = 5;
     waveCount = new int[waves.Count];
+
+    for (int i = 0; i < waves.Count; i++)
+    {
+      waveCharges[i] = 2;
+    }
+
     stopped = false;
   }
 
@@ -70,11 +85,19 @@ public class ShipFactory : MonoBehaviour
 
   public void SpawnWave(int index)
   {
-    Gamemaster.Instance.SpawnWaveReward(index);
+    if (waveCharges[index] != 0)
+    {
+      Gamemaster.Instance.SpawnWaveReward(index);
 
-    waveCount[index]++;
-    GameObject newWave = Instantiate(waves[index], Gamemaster.waves.transform);
-    WaveData wd = newWave.GetComponent<WaveData>();
-    wd.SpawnWave();
+      waveCount[index]++;
+      GameObject newWave = Instantiate(waves[index], Gamemaster.waves.transform);
+      WaveData wd = newWave.GetComponent<WaveData>();
+      wd.SpawnWave();
+      waveCharges[index]--;
+    }
+    else
+    {
+      Gamemaster.Instance.FailedSpawnPunish();
+    }
   }
 }

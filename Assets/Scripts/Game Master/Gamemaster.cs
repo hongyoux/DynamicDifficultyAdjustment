@@ -31,12 +31,13 @@ public class Gamemaster : MonoBehaviour
   public int[] damageDealtByBullets;
 
   [HideInInspector]
-  public int targetTime; //Seconds (5 minute gameplay session)
+  public int targetTime; //Seconds (2 minute gameplay session)
+
+  [HideInInspector]
+  public int lastWave;
 
   public List<BulletComponent> bulletsNearPlayer;
-
   public List<Ship> enemiesByValue;
-
   public List<ScorePickupMovement> scorePickupsNearPlayer;
 
   private Player p;
@@ -47,7 +48,7 @@ public class Gamemaster : MonoBehaviour
   // Use this for initialization
   void Awake()
   {
-    targetTime = 300;
+    targetTime = 120;
     InitOnce();
     Reset();
 
@@ -95,7 +96,9 @@ public class Gamemaster : MonoBehaviour
 
     totalPossiblePoints = 0;
     damageDealtByBullets = new int[4]; // Reset to empty array of damage dealt
-    
+
+    lastWave = -1;
+
     timeStart = Time.time;
 
     sf.Reset();
@@ -284,29 +287,17 @@ public class Gamemaster : MonoBehaviour
 
   public void SpawnWaveReward(int index)
   {
-    int[] waveCount = sf.GetSummonedWavesSoFar();
-    int totalWaves = 0;
-    float percentOfWave = 0;
-    foreach (int i in waveCount)
+    float reward = .001f;
+    if (lastWave != index)
     {
-      totalWaves += i;
-    }
-    float average = 1.0f * totalWaves / waveCount.Length;
-
-    float reward = 0f;
-
-    if (waveCount[index] < average)
-    {
-      reward = .005f;
-    }
-    else
-    {
-      // Punish for using same waves over and over.
-      float diff = waveCount[index] - average;
-      reward = -.001f * Mathf.Pow(diff, 2);
+      Debug.Log(string.Format("Before: {0}, Current: {1}, Reward: {2}", lastWave, index, reward));
     }
 
-    Debug.Log(string.Format("Wave {0} has been summoned {1} times. Giving reward of {2}", index, waveCount[index], reward));
     gma.SetReward(reward);
+  }
+
+  public void FailedSpawnPunish()
+  {
+    gma.SetReward(-.01f); // Big negative when spawning a wave that is 0 waves left
   }
 }
