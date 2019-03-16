@@ -104,8 +104,15 @@ public class Gamemaster : MonoBehaviour
   public void Stop()
   {
     float totalTime = Time.time - timeStart;
-    float distFromTargetTime = Mathf.Abs(totalTime - targetTime);
-    gma.SetReward(1f - (distFromTargetTime / targetTime) * 2f); // 1 if hit target time, else -1 to 1 to -x.
+    float distFromTargetTime = totalTime - targetTime;
+    if (distFromTargetTime < 0)
+    {
+      gma.SetReward(-1f); // -1 if before target time.
+    }
+    else
+    {
+      gma.SetReward(1f); // 1 if past target time
+    }
     gma.Done();
 
     Destroy(bullets);
@@ -284,12 +291,22 @@ public class Gamemaster : MonoBehaviour
     {
       totalWaves += i;
     }
+    float average = 1.0f * totalWaves / waveCount.Length;
 
-    if (totalWaves > 0)
+    float reward = 0f;
+
+    if (waveCount[index] < average)
     {
-      percentOfWave = (float)waveCount[index] / totalWaves;
+      reward = .005f;
+    }
+    else
+    {
+      // Punish for using same waves over and over.
+      float diff = waveCount[index] - average;
+      reward = -.001f * Mathf.Pow(diff, 2);
     }
 
-    gma.SetReward(.0005f * percentOfWave); // Between 0 and .01. Rewarded more for spawning low percentage waves. 120 waves in 10 minutes, ~1.2 points total.
+    Debug.Log(string.Format("Wave {0} has been summoned {1} times. Giving reward of {2}", index, waveCount[index], reward));
+    gma.SetReward(reward);
   }
 }

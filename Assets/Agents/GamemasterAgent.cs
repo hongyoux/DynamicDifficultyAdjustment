@@ -6,10 +6,12 @@ using MLAgents;
 public class GamemasterAgent : Agent
 {
   float previousHP;
+  int count;
 
   private void Start()
   {
     previousHP = Gamemaster.Instance.GetPlayer().stats.maxHealth;
+    count = 0;
   }
 
   public override void AgentReset()
@@ -20,6 +22,7 @@ public class GamemasterAgent : Agent
 
   public override void CollectObservations()
   {
+    count++;
     //Get Player relative position on screen
     ObservePlayerStats();
     //Get time elapsed in seconds
@@ -56,6 +59,8 @@ public class GamemasterAgent : Agent
 
     //Get Health Lost since previous action
     float lostHealth = previousHP - p.stats.currHealth;
+    float totalLost = p.stats.maxHealth - p.stats.currHealth;
+
     AddVectorObs(lostHealth);
     previousHP = p.stats.currHealth;
 

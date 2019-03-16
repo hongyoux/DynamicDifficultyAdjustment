@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: GamemasterHeuristicBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 35
+    vectorObservationSize: 24
     numStackedVectorObservations: 1
-    vectorActionSize: 17000000
+    vectorActionSize: 0d000000
     cameraResolutions: []
     vectorActionDescriptions:
     - Index of wave to send
