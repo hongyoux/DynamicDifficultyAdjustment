@@ -9,10 +9,7 @@ public class GMHeuristicDecision : Decision
 
   public override float[] Decide(List<float> vectorObs, List<Texture2D> visualObs, float reward, bool done, List<float> memory)
   {
-    return new float[] { count++ % 23 };
-
-    //int randomInt = Random.Range(0, 23);
-    //return new float[] { randomInt };
+    return new float[] { count++ % 13 };
   }
 
   public override List<float> MakeMemory(List<float> vectorObs, List<Texture2D> visualObs, float reward, bool done, List<float> memory)

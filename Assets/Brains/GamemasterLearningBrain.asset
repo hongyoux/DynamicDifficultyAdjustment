@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GamemasterLearningBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 24
-    numStackedVectorObservations: 1
+    vectorObservationSize: 12
+    numStackedVectorObservations: 2
     vectorActionSize: 0d000000
     cameraResolutions: []
     vectorActionDescriptions:

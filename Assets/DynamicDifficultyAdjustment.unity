@@ -163,6 +163,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d, type: 2}
     _brainsToControl:
     - {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d, type: 2}
+    - {fileID: 11400000, guid: 63703186dc7ec194e812b6f683341254, type: 2}
   maxSteps: 0
   trainingConfiguration:
     width: 1280
@@ -422,6 +423,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d,
         type: 2}
+    - target: {fileID: 800253297, guid: 883c16db99981e945ad11450169c8adf, type: 3}
+      propertyPath: agentParameters.onDemandDecision
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 800253297, guid: 883c16db99981e945ad11450169c8adf, type: 3}
+      propertyPath: agentParameters.resetOnDone
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 800253297, guid: 883c16db99981e945ad11450169c8adf, type: 3}
+      propertyPath: agentParameters.maxStep
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4740158141292477589, guid: 883c16db99981e945ad11450169c8adf,
         type: 3}
       propertyPath: waypoints.Array.data[0]

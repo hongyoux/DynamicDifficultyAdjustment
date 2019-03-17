@@ -27,6 +27,7 @@ public class EnemyBulletComponent : BulletComponent
           Gamemaster.Instance.damageDealtByBullets[3]++;
           break;
       }
+      Gamemaster.Instance.sf.UpdateWaveHit();
       Gamemaster.Instance.PlayerHitReward();
 
       Destroy(gameObject);

@@ -6,12 +6,10 @@ using MLAgents;
 public class GamemasterAgent : Agent
 {
   float previousHP;
-  int count;
 
   private void Start()
   {
     previousHP = Gamemaster.Instance.GetPlayer().stats.maxHealth;
-    count = 0;
   }
 
   public override void AgentReset()
@@ -22,17 +20,28 @@ public class GamemasterAgent : Agent
 
   public override void CollectObservations()
   {
-    count++;
-    //Get Player relative position on screen
-    ObservePlayerStats();
-    //Get time elapsed in seconds
-    AddVectorObs(Time.time / Gamemaster.Instance.targetTime);
-    //Get total count of each summon so far
-    ObservePercentageOfShipsSummoned();
-    //Get all ship types on screen right now
-    ObservePercentageOfShipsOnScreen();
-    //Get count of all bullets that have hit the player so far
-    ObservePercentageOfBulletDamageTaken();
+    ////Get Player relative position on screen
+    //ObservePlayerStats();
+    ////Get time elapsed in seconds
+
+    //AddVectorObs(Gamemaster.Instance.getGameTime());
+
+    //AddVectorObs(Gamemaster.Instance.GetExpectedDamage());
+
+    //////Get total count of each summon so far
+    ////ObservePercentageOfShipsSummoned();
+
+    //////Get all ship types on screen right now
+    ////ObservePercentageOfShipsOnScreen();
+
+    ////Get average damage dealt per wave to player
+    //ObserveAverageDamagePerWave();
+
+    ////Get count of all bullets that have hit the player so far
+    //ObservePercentageOfBulletDamageTaken();
+
+    //Get if can summon wave this round
+    ObserveWaveAvailable();
   }
 
   public override void AgentAction(float[] vectorAction, string textAction)
@@ -55,8 +64,6 @@ public class GamemasterAgent : Agent
     //Get Player health (Percentage)
     AddVectorObs(p.stats.currHealth);
 
-    Debug.Log(string.Format("Player's current Health: {0}", p.stats.currHealth));
-
     //Get Health Lost since previous action
     float lostHealth = previousHP - p.stats.currHealth;
     float totalLost = p.stats.maxHealth - p.stats.currHealth;
@@ -64,12 +71,8 @@ public class GamemasterAgent : Agent
     AddVectorObs(lostHealth);
     previousHP = p.stats.currHealth;
 
-    Debug.Log(string.Format("Health Lost Between Rounds: {0}", lostHealth));
-
     //Get Player score (Percentage of total possible points earned)
     AddVectorObs(p.stats.score);
-
-    Debug.Log(string.Format("Player's Current Score: {0}", p.stats.score));
   }
 
   private float CalcRelativePos(float val, float min, float max)
@@ -78,55 +81,27 @@ public class GamemasterAgent : Agent
     return 1 - ((max - val) / max);
   }
 
-
   private void ObservePercentageOfShipsSummoned()
   {
     int[] summonedSoFar = Gamemaster.Instance.sf.GetSummonedWavesSoFar();
-    int total = 0;
-
-    float[] summonedSoFarFloat = new float[summonedSoFar.Length];
-
-    foreach (int i in summonedSoFar)
+    for (int i = 0; i < summonedSoFar.Length; i++)
     {
-      total += i;
+      AddVectorObs(summonedSoFar[i]);
     }
 
-    if (total != 0)
-    {
-      for (int i = 0; i < summonedSoFarFloat.Length; i++)
-      {
-        summonedSoFarFloat[i] = (float)summonedSoFar[i];
-      }
-    }
-
-    Debug.Log(string.Format("Waves summoned so far: [{0}]", string.Join(",", summonedSoFarFloat)));
-
-    AddVectorObs(summonedSoFarFloat);
+    Debug.Log(string.Format("Waves summoned so far: [{0}]", string.Join(",", summonedSoFar)));
   }
 
   private void ObservePercentageOfShipsOnScreen()
   {
     int[] shipsCount = Gamemaster.Instance.GetCountOfAllShips();
-    int total = 0;
 
-    float[] shipsCountAsFloat = new float[shipsCount.Length];
-
-    foreach (int i in shipsCount)
+    for (int i = 0; i < shipsCount.Length; i++)
     {
-      total += i;
+      AddVectorObs(shipsCount[i]);
     }
 
-    if (total != 0)
-    {
-      for (int i = 0; i < shipsCountAsFloat.Length; i++)
-      {
-        shipsCountAsFloat[i] = (float)shipsCount[i];
-      }
-    }
-
-    Debug.Log(string.Format("Ships on Screen: [{0}]", string.Join(",", shipsCountAsFloat)));
-
-    AddVectorObs(shipsCountAsFloat);
+    Debug.Log(string.Format("Ships on Screen: [{0}]", string.Join(",", shipsCount)));
   }
 
   private void ObservePercentageOfBulletDamageTaken()
@@ -134,16 +109,60 @@ public class GamemasterAgent : Agent
     Player p = Gamemaster.Instance.GetPlayer();
     int[] dmgTaken = Gamemaster.Instance.damageDealtByBullets;
 
-    float[] dmgTakenAsFloats = new float[dmgTaken.Length];
-
     for (int i = 0; i < dmgTaken.Length; i++)
     {
-      dmgTakenAsFloats[i] = (float)dmgTaken[i];
+      AddVectorObs(dmgTaken[i]);
     }
 
-    Debug.Log(string.Format("Damage Taken Per Enemy Type: [{0}]", string.Join(",", dmgTakenAsFloats)));
-
-    AddVectorObs(dmgTakenAsFloats);
+    Debug.Log(string.Format("Damage Taken Per Enemy Type: [{0}]", string.Join(",", dmgTaken)));
   }
 
+  private void ObserveAverageDamagePerWave()
+  {
+    int[] waveHits = Gamemaster.Instance.sf.GetWaveHits();
+    int[] waveCount = Gamemaster.Instance.sf.GetSummonedWavesSoFar();
+
+    float[] avgDamage = new float[waveCount.Length];
+
+    for (int i = 0; i < waveCount.Length; i++)
+    {
+      if (waveCount[i] == 0)
+      {
+        avgDamage[i] = 0f;
+      }
+      else
+      {
+        avgDamage[i] = (float)waveHits[i] / waveCount[i];
+      }
+      AddVectorObs(avgDamage[i]);
+    }
+
+    Debug.Log(string.Format("Average Dmg Per Wave: [{0}]", string.Join(",", avgDamage)));
+  }
+
+  private void ObserveWaveAvailable()
+  {
+    int[] waveCharges = Gamemaster.Instance.sf.GetWaveCharges();
+
+    float[] waveAvailable = new float[waveCharges.Length];
+
+    for (int i = 0; i < waveCharges.Length; i++)
+    {
+      if (waveCharges[i] != 0) {
+        waveAvailable[i] = 1.0f;
+      }
+      else
+      {
+        waveAvailable[i] = 0.0f;
+      }
+      AddVectorObs(waveAvailable[i]);
+    }
+
+    Debug.Log(string.Format("Wave availability: [{0}]", string.Join(",", waveAvailable)));
+  }
+
+  public override void AgentOnDone()
+  {
+    base.AgentOnDone();
+  }
 }

@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class ShipFactory : MonoBehaviour
 {
+  private const int chargeAmt = 1;
+
   public List<GameObject> ships;
 
   public List<GameObject> waves;
 
   private int[] waveCount;
 
-  public int[] waveCharges;
+  private int[] waveHits;
+
+  private int[] waveCharges;
 
   private float cooldown;
   private float timeBetweenWaves;
@@ -24,12 +28,16 @@ public class ShipFactory : MonoBehaviour
     stopped = true;
     timeBetweenWaves = 5;
     cooldown = Time.time + timeBetweenWaves;
+
+    waveHits = new int[waves.Count];
+
     waveCount = new int[waves.Count];
 
     waveCharges = new int[waves.Count];
+
     for (int i = 0; i < waves.Count; i++)
     {
-      waveCharges[i] = 2;
+      waveCharges[i] = chargeAmt;
     }
 
   }
@@ -43,13 +51,14 @@ public class ShipFactory : MonoBehaviour
     }
     if (Time.time >= cooldown)
     {
+      Gamemaster.Instance.previousHP = Gamemaster.Instance.GetPlayer().stats.currHealth;
       // Really should be agent action.
       Gamemaster.Instance.GetComponent<GamemasterAgent>().RequestDecision();
       cooldown = Time.time + timeBetweenWaves;
 
       timeBetweenWaves = 5 - 2 * (Time.time - Gamemaster.Instance.timeStart) / Gamemaster.Instance.targetTime; // at target time, spawning every 3 seconds
 
-      Debug.Log(string.Format("Time between waves: {0}", timeBetweenWaves));
+      //Debug.Log(string.Format("Time between waves: {0}", timeBetweenWaves));
     }
   }
 
@@ -57,11 +66,16 @@ public class ShipFactory : MonoBehaviour
   {
     cooldown = Time.time + timeBetweenWaves;
     timeBetweenWaves = 5;
+
+    waveHits = new int[waves.Count];
+
     waveCount = new int[waves.Count];
+
+    waveCharges = new int[waves.Count];
 
     for (int i = 0; i < waves.Count; i++)
     {
-      waveCharges[i] = 2;
+      waveCharges[i] = chargeAmt;
     }
 
     stopped = false;
@@ -83,6 +97,16 @@ public class ShipFactory : MonoBehaviour
     return waveCount;
   }
 
+  public int[] GetWaveCharges()
+  {
+    return waveCharges;
+  }
+
+  public int[] GetWaveHits()
+  {
+    return waveHits;
+  }
+
   public void SpawnWave(int index)
   {
     if (waveCharges[index] != 0)
@@ -94,10 +118,32 @@ public class ShipFactory : MonoBehaviour
       WaveData wd = newWave.GetComponent<WaveData>();
       wd.SpawnWave();
       waveCharges[index]--;
+
+      TryRefillWaves();
     }
     else
     {
-      Gamemaster.Instance.FailedSpawnPunish();
+      Gamemaster.Instance.FailedSpawnPunish(index);
     }
   }
+
+  private void TryRefillWaves()
+  {
+    foreach (int i in waveCharges) {
+      if (i != 0)
+      {
+        return;
+      }
+    }
+    for (int i = 0; i < waveCharges.Length; i++)
+    {
+      waveCharges[i] = chargeAmt;
+    }
+  }
+
+  public void UpdateWaveHit()
+  {
+    //waveHits[Gamemaster.Instance.lastWave]++;
+  }
 }
+
