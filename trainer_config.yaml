@@ -273,14 +273,16 @@ DDAPlayerLearningBrain:
 
 GamemasterLearningBrain:
     normalize: false
-    batch_size: 512
-    buffer_size: 8192
-    summary_freq: 8192
+    batch_size: 1024
+    buffer_size: 10240
+    summary_freq: 10240
+    time_horizon: 128
     lambd: 0.92
-    gamma: 0.90
+    gamma: 0.85
     beta: 0.01
     epsilon: .1
-    learning_rate: 1e-5
+    learning_rate: 5e-4
+    hidden_units: 64
     num_layers: 1
     num_epoch: 3
     max_steps: 1.0e7

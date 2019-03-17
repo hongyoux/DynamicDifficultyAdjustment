@@ -322,12 +322,13 @@ public class Gamemaster : MonoBehaviour
 
   public void SpawnWaveReward(int index)
   {
-    float reward = .2f;
+    float reward = .05f;
     //if (lastWave != index)
     //{
     //  Debug.Log(string.Format("Before: {0}, Current: {1}, Reward: {2}", lastWave, index, reward));
     //  lastWave = index;
     //}
+
 
     gma.AddReward(reward);
   }
@@ -336,6 +337,6 @@ public class Gamemaster : MonoBehaviour
   {
     Debug.Log(string.Format("Failed when trying to spawn index {0}", index));
     // Instantly fail the bot when it does this.
-    gma.AddReward(-.1f); // Big negative when spawning a wave that is 0 waves left
+    gma.AddReward(-.05f); // Big negative when spawning a wave that is 0 waves left
   }
 }

@@ -111,14 +111,13 @@ public class ShipFactory : MonoBehaviour
   {
     if (waveCharges[index] != 0)
     {
-      Gamemaster.Instance.SpawnWaveReward(index);
-
       waveCount[index]++;
       GameObject newWave = Instantiate(waves[index], Gamemaster.waves.transform);
       WaveData wd = newWave.GetComponent<WaveData>();
       wd.SpawnWave();
       waveCharges[index]--;
 
+      Gamemaster.Instance.SpawnWaveReward(index);
       TryRefillWaves();
     }
     else
