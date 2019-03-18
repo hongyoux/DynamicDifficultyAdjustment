@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ShipFactory : MonoBehaviour
 {
-  private const int chargeAmt = 1;
+  private const int chargeAmt = 4;
 
   public List<GameObject> ships;
 
@@ -26,7 +26,7 @@ public class ShipFactory : MonoBehaviour
   void Start()
   {
     stopped = true;
-    timeBetweenWaves = 5;
+    timeBetweenWaves = chargeAmt;
     cooldown = Time.time + timeBetweenWaves;
 
     waveHits = new int[waves.Count];
@@ -50,14 +50,14 @@ public class ShipFactory : MonoBehaviour
       Gamemaster.Instance.GetComponent<GamemasterAgent>().RequestDecision();
       cooldown = Time.time + timeBetweenWaves;
 
-      timeBetweenWaves = 5 - 2 * (Time.time - Gamemaster.Instance.timeStart) / Gamemaster.Instance.targetTime; // at target time, spawning every 3 seconds
+      timeBetweenWaves = chargeAmt - 2 * (Time.time - Gamemaster.Instance.timeStart) / Gamemaster.Instance.targetTime; // at target time, spawning every 3 seconds
     }
   }
 
   public void Reset()
   {
     cooldown = Time.time + timeBetweenWaves;
-    timeBetweenWaves = 5;
+    timeBetweenWaves = chargeAmt;
 
     waveHits = new int[waves.Count];
 

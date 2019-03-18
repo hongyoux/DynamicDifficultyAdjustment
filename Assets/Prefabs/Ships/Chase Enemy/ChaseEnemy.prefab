@@ -177,7 +177,7 @@ MonoBehaviour:
     maxHealth: 4
     lives: 0
     position: {x: 0, y: 0}
-    movespeed: 3
+    movespeed: 6
     score: 10
     powerLevel: 0
   spawnPoint: {fileID: 443633323}

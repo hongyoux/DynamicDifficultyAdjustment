@@ -45,10 +45,13 @@ public class Gamemaster : MonoBehaviour
   private GamemasterAgent gma;
   private UIComponent uiComponent;
 
+  private bool doOnce;
+
   // Use this for initialization
   void Awake()
   {
-    targetTime = 120;
+    targetTime = 60;
+    doOnce = true;
     InitOnce();
     Reset();
 
@@ -78,6 +81,7 @@ public class Gamemaster : MonoBehaviour
     GameObject pObj = Instantiate(player, playerSpawnLocation.position, playerSpawnLocation.rotation, ships.transform);
     p = pObj.GetComponent<Player>();
     pa = p.GetComponent<PlayerAgent>();
+
   }
 
   public void Reset()
@@ -119,11 +123,22 @@ public class Gamemaster : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    if (doOnce)
+    {
+      doOnce = false;
+    }
+
     uiComponent.UpdateUI(p.stats.currHealth, p.stats.lives, p.stats.score, getGameTime());
 
     updateObservableEnemies();
     updateObservableBullets();
     updateObservableScoreObjects();
+
+    if (Input.GetKeyDown(KeyCode.Space))
+    {
+      Stop();
+      pa.Done();
+    }
   }
 
   private void updateObservableScoreObjects()

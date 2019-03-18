@@ -20,4 +20,4 @@ MonoBehaviour:
     vectorActionDescriptions:
     - Index of wave to send
     vectorActionSpaceType: 0
-  model: {fileID: 0}
+  model: {fileID: 4900000, guid: cc15bc1a246b3e445a42424bb8cc76a0, type: 3}

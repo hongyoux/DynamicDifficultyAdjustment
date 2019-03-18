@@ -144,5 +144,5 @@ MonoBehaviour:
     damage: 0
     direction: {x: 0, y: 1}
     position: {x: 0, y: 0}
-    velocity: 1
+    velocity: 2
     acceleration: -0.5

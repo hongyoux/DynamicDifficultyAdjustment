@@ -30,8 +30,32 @@ public class UIComponent : MonoBehaviour
   public void UpdateUI(int h, int l, int s, float d)
   {
     health.text = string.Format("{0}", h.ToString());
-    lives.text = string.Format("{0}", l.ToString());
     score.text = string.Format("{0}", s.ToString());
     time.text = string.Format("{0:F2}", d);
+
+    switch (l)
+    {
+      case 3:
+        {
+          lives.text = "First Round";
+          break;
+        }
+      case 2:
+        {
+          lives.text = "Second Round";
+          break;
+        }
+      case 1:
+        {
+          lives.text = "Last Round";
+          break;
+        }
+      default:
+        {
+          lives.text = "Game Over";
+          break;
+        }
+    }
+
   }
 }

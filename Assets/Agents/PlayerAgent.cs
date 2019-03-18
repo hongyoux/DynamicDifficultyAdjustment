@@ -15,8 +15,6 @@ public class PlayerAgent : Agent
   {
     GetComponent<Renderer>().enabled = true;
     p.stats.currHealth = p.stats.maxHealth;
-    p.stats.lives = 1;
-    p.stats.score = 0;
     p.stats.position = Gamemaster.Instance.playerSpawnLocation.position;
     transform.position = Gamemaster.Instance.playerSpawnLocation.position;
     Gamemaster.Instance.Reset();

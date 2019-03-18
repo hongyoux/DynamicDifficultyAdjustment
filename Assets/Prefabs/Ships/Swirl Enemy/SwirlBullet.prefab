@@ -134,7 +134,7 @@ MonoBehaviour:
     damage: 2
     direction: {x: 0, y: -1}
     position: {x: 0, y: 0}
-    velocity: 3
+    velocity: 6
     acceleration: 0
   freq: 4
   width: 2

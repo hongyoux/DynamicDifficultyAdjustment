@@ -157,25 +157,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   broadcastHub:
     broadcastingBrains:
-    - {fileID: 11400000, guid: 63703186dc7ec194e812b6f683341254, type: 2}
     - {fileID: 11400000, guid: 2e1039d87a7395d47abd15843c6481c4, type: 2}
-    - {fileID: 11400000, guid: d3e06b9f9ef82d941b359e3549cb6891, type: 2}
     - {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d, type: 2}
-    _brainsToControl:
-    - {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d, type: 2}
+    _brainsToControl: []
   maxSteps: 0
   trainingConfiguration:
     width: 1280
     height: 720
     qualityLevel: 5
     timeScale: 5
-    targetFrameRate: 60
+    targetFrameRate: 144
   inferenceConfiguration:
     width: 1280
     height: 720
     qualityLevel: 5
     timeScale: 1
-    targetFrameRate: 60
+    targetFrameRate: 144
   resetParameters:
     resetParameters: []
 --- !u!1 &324600170
@@ -411,5 +408,15 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 324600173}
+    - target: {fileID: 6923693460937885213, guid: 883c16db99981e945ad11450169c8adf,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 6923693460937885213, guid: 883c16db99981e945ad11450169c8adf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -358
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 883c16db99981e945ad11450169c8adf, type: 3}
