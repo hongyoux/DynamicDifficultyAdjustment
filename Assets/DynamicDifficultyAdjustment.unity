@@ -168,7 +168,7 @@ MonoBehaviour:
     width: 1280
     height: 720
     qualityLevel: 5
-    timeScale: 4
+    timeScale: 5
     targetFrameRate: 60
   inferenceConfiguration:
     width: 1280
@@ -270,12 +270,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1236970168 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5418969512240259296, guid: 883c16db99981e945ad11450169c8adf,
-    type: 3}
-  m_PrefabInstance: {fileID: 6923693460490240870}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1852151626
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,27 +411,5 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 324600173}
-    - target: {fileID: 800253297, guid: 883c16db99981e945ad11450169c8adf, type: 3}
-      propertyPath: brain
-      value: 
-      objectReference: {fileID: 11400000, guid: 29ab61a445329fc4abd99b444cfe0e5d,
-        type: 2}
-    - target: {fileID: 800253297, guid: 883c16db99981e945ad11450169c8adf, type: 3}
-      propertyPath: agentParameters.onDemandDecision
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 800253297, guid: 883c16db99981e945ad11450169c8adf, type: 3}
-      propertyPath: agentParameters.resetOnDone
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 800253297, guid: 883c16db99981e945ad11450169c8adf, type: 3}
-      propertyPath: agentParameters.maxStep
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4740158141292477589, guid: 883c16db99981e945ad11450169c8adf,
-        type: 3}
-      propertyPath: waypoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 1236970168}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 883c16db99981e945ad11450169c8adf, type: 3}

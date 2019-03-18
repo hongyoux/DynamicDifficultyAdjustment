@@ -34,9 +34,6 @@ public class Gamemaster : MonoBehaviour
   public int targetTime; //Seconds (2 minute gameplay session)
 
   [HideInInspector]
-  public int lastWave;
-
-  [HideInInspector]
   public int previousHP;
 
   public List<BulletComponent> bulletsNearPlayer;
@@ -100,8 +97,6 @@ public class Gamemaster : MonoBehaviour
     totalPossiblePoints = 0;
     damageDealtByBullets = new int[4]; // Reset to empty array of damage dealt
 
-    lastWave = -1;
-
     previousHP = -1;
 
     timeStart = Time.time;
@@ -111,17 +106,6 @@ public class Gamemaster : MonoBehaviour
 
   public void Stop()
   {
-    float totalTime = Time.time - timeStart;
-    float distFromTargetTime = totalTime - targetTime;
-    //if (distFromTargetTime < 0)
-    //{
-    //  gma.SetReward(-.5f); // -1 if before target time.
-    //}
-    //else
-    //{
-    //  float reward = 1f;
-    //  gma.SetReward(reward); // 1 --> -inf
-    //}
     gma.Done();
 
     Destroy(bullets);
@@ -135,14 +119,6 @@ public class Gamemaster : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (getGameTime() >= targetTime)
-    {
-      //gma.SetReward(1f); // Hit Target Time
-
-      Stop();
-      pa.Done();
-    }
-
     uiComponent.UpdateUI(p.stats.currHealth, p.stats.lives, p.stats.score, getGameTime());
 
     updateObservableEnemies();
@@ -297,16 +273,16 @@ public class Gamemaster : MonoBehaviour
 
   public void PlayerHitReward()
   {
-    //float expectedDamage = GetExpectedDamage();
+    float expectedDamage = GetExpectedDamage();
 
-    //if (previousHP - p.stats.currHealth < expectedDamage)
-    //{
-    //  gma.SetReward(.001f);
-    //}
-    //else
-    //{
-    //  gma.SetReward(-.001f);
-    //}
+    if (previousHP - p.stats.currHealth < expectedDamage)
+    {
+      gma.AddReward(.001f);
+    }
+    else
+    {
+      gma.AddReward(-.001f);
+    }
   }
 
   public float GetExpectedDamage()
@@ -320,23 +296,13 @@ public class Gamemaster : MonoBehaviour
     return expectedDmg;
   }
 
-  public void SpawnWaveReward(int index)
+  public float GetExpectedDamagePercent()
   {
-    float reward = .05f;
-    //if (lastWave != index)
-    //{
-    //  Debug.Log(string.Format("Before: {0}, Current: {1}, Reward: {2}", lastWave, index, reward));
-    //  lastWave = index;
-    //}
-
-
-    gma.AddReward(reward);
+    return GetExpectedDamage() / p.stats.maxHealth;
   }
 
-  public void FailedSpawnPunish(int index)
+  public void SpawnWaveReward()
   {
-    Debug.Log(string.Format("Failed when trying to spawn index {0}", index));
-    // Instantly fail the bot when it does this.
-    gma.AddReward(-.05f); // Big negative when spawning a wave that is 0 waves left
+    gma.AddReward(.005f);
   }
 }

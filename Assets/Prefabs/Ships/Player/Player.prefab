@@ -128,7 +128,7 @@ MonoBehaviour:
   stats:
     currHealth: 0
     name: Player
-    maxHealth: 10000
+    maxHealth: 200
     lives: 1
     position: {x: 0, y: 0}
     movespeed: 5

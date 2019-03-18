@@ -1833,7 +1833,7 @@ MonoBehaviour:
   dieAtEnd: 1
   reverse: 0
   waypoints:
-  - {fileID: 5478150593651803715}
+  - {fileID: 5418969512240259296}
   - {fileID: 5478150593651803715}
 --- !u!1 &6284574211467484377
 GameObject:
@@ -2149,6 +2149,7 @@ MonoBehaviour:
   totalPossiblePoints: 0
   damageDealtByBullets: 
   targetTime: 300
+  previousHP: 0
   bulletsNearPlayer: []
   enemiesByValue: []
   scorePickupsNearPlayer: []

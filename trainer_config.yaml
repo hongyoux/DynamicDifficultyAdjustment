@@ -259,31 +259,34 @@ BasicLearning:
     summary_freq: 2000
     time_horizon: 3
 
-DDAPlayerLearningBrain:
-    normalize: false
-    batch_size: 128
-    buffer_size: 20480
-    summary_freq: 10240
-    lambd: 0.94
-    gamma: 0.90
-    beta: 0.001
-    num_layers: 3
-    num_epoch: 10
-    max_steps: 5.0e6
-
 GamemasterLearningBrain:
     normalize: false
-    batch_size: 1024
+    batch_size: 2048
     buffer_size: 10240
     summary_freq: 10240
     time_horizon: 128
-    lambd: 0.92
-    gamma: 0.85
+    lambd: 0.94
+    gamma: 0.95
     beta: 0.01
     epsilon: .1
-    learning_rate: 5e-4
-    hidden_units: 64
-    num_layers: 1
-    num_epoch: 3
+    learning_rate: 5e-6
+    hidden_units: 128
+    num_layers: 2
+    num_epoch: 5
     max_steps: 1.0e7
 
+DDAPlayerLearningBrain:
+    normalize: false
+    batch_size: 2048
+    buffer_size: 10240
+    summary_freq: 10240
+    time_horizon: 128
+    lambd: 0.94
+    gamma: 0.95
+    beta: 0.01
+    epsilon: .1
+    learning_rate: 5e-6
+    hidden_units: 128
+    num_layers: 2
+    num_epoch: 5
+    max_steps: 1.0e7

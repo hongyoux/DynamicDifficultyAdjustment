@@ -15,12 +15,12 @@ public class ShipFactory : MonoBehaviour
 
   private int[] waveHits;
 
-  private int[] waveCharges;
-
   private float cooldown;
   private float timeBetweenWaves;
 
   private bool stopped;
+
+  private int lastWave;
 
   // Use this for initialization
   void Start()
@@ -33,13 +33,7 @@ public class ShipFactory : MonoBehaviour
 
     waveCount = new int[waves.Count];
 
-    waveCharges = new int[waves.Count];
-
-    for (int i = 0; i < waves.Count; i++)
-    {
-      waveCharges[i] = chargeAmt;
-    }
-
+    lastWave = -1;
   }
 
   // Update is called once per frame
@@ -57,8 +51,6 @@ public class ShipFactory : MonoBehaviour
       cooldown = Time.time + timeBetweenWaves;
 
       timeBetweenWaves = 5 - 2 * (Time.time - Gamemaster.Instance.timeStart) / Gamemaster.Instance.targetTime; // at target time, spawning every 3 seconds
-
-      //Debug.Log(string.Format("Time between waves: {0}", timeBetweenWaves));
     }
   }
 
@@ -71,12 +63,7 @@ public class ShipFactory : MonoBehaviour
 
     waveCount = new int[waves.Count];
 
-    waveCharges = new int[waves.Count];
-
-    for (int i = 0; i < waves.Count; i++)
-    {
-      waveCharges[i] = chargeAmt;
-    }
+    lastWave = -1;
 
     stopped = false;
   }
@@ -85,21 +72,9 @@ public class ShipFactory : MonoBehaviour
   {
     stopped = true;
   }
-
-  void SpawnRandomWave()
-  {
-    int index = UnityEngine.Random.Range(0, waves.Count);
-    SpawnWave(index);
-  }
-
   public int[] GetSummonedWavesSoFar()
   {
     return waveCount;
-  }
-
-  public int[] GetWaveCharges()
-  {
-    return waveCharges;
   }
 
   public int[] GetWaveHits()
@@ -109,40 +84,20 @@ public class ShipFactory : MonoBehaviour
 
   public void SpawnWave(int index)
   {
-    if (waveCharges[index] != 0)
-    {
-      waveCount[index]++;
-      GameObject newWave = Instantiate(waves[index], Gamemaster.waves.transform);
-      WaveData wd = newWave.GetComponent<WaveData>();
-      wd.SpawnWave();
-      waveCharges[index]--;
-
-      Gamemaster.Instance.SpawnWaveReward(index);
-      TryRefillWaves();
+    if (lastWave != index) {
+      Gamemaster.Instance.SpawnWaveReward();
     }
-    else
-    {
-      Gamemaster.Instance.FailedSpawnPunish(index);
-    }
+    waveCount[index]++;
+    GameObject newWave = Instantiate(waves[index], Gamemaster.waves.transform);
+    WaveData wd = newWave.GetComponent<WaveData>();
+    wd.SpawnWave();
+    lastWave = index;
   }
-
-  private void TryRefillWaves()
-  {
-    foreach (int i in waveCharges) {
-      if (i != 0)
-      {
-        return;
-      }
-    }
-    for (int i = 0; i < waveCharges.Length; i++)
-    {
-      waveCharges[i] = chargeAmt;
-    }
-  }
+  
 
   public void UpdateWaveHit()
   {
-    //waveHits[Gamemaster.Instance.lastWave]++;
+    waveHits[lastWave]++;
   }
 }
 
