@@ -12,7 +12,7 @@ public class SweepEnemyWeapon : WeaponComponent
 
   protected override void Init()
   {
-    fireNum = 5;
+    fireNum = 8;
     intBtwn = .1f;
     count = 0;
   }

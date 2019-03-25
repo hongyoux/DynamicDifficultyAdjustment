@@ -12,10 +12,9 @@ public class GamemasterAgent : Agent
     previousHP = Gamemaster.Instance.GetPlayer().stats.maxHealth;
   }
 
-  public override void AgentReset()
+  public void resetPreviousHP()
   {
     previousHP = Gamemaster.Instance.GetPlayer().stats.maxHealth;
-    base.AgentReset();
   }
 
   public override void CollectObservations()

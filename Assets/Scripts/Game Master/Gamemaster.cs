@@ -110,7 +110,7 @@ public class Gamemaster : MonoBehaviour
 
   public void Stop()
   {
-    gma.Done();
+    gma.resetPreviousHP();
 
     Destroy(bullets);
     Destroy(ships);
@@ -123,10 +123,7 @@ public class Gamemaster : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (doOnce)
-    {
-      doOnce = false;
-    }
+
 
     uiComponent.UpdateUI(p.stats.currHealth, p.stats.lives, p.stats.score, getGameTime());
 

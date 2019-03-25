@@ -37,7 +37,8 @@ public class EnemyShip : Ship
     {
       GameObject player = collision.gameObject;
       Ship playerShip = player.GetComponent<Ship>();
-      playerShip.TakeDamage(2);
+      playerShip.TakeDamage(1);
+      TakeDamage(1);
     }
   }
 
